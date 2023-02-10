@@ -26,4 +26,12 @@ class FizzBuzzTest {
         assertThat(strings[11]).isEqualTo("kuksa")
         assertThat(strings[98]).isEqualTo("kuksa")
     }
+
+    @Test
+    fun `replace multiples of 5 with sauna`() {
+        val fizzBuzz = FizzBuzz()
+
+        val strings = fizzBuzz.printNumbers()
+        assertThat(strings[4]).isEqualTo("sauna")
+    }
 }
