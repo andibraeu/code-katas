@@ -15,5 +15,11 @@ class FizzBuzzTest {
         assertThat(strings.last()).isEqualTo("100")
     }
 
+    @Test
+    fun `replace multiples of 3 with kuksa`() {
+        val fizzBuzz = FizzBuzz()
 
+        val strings = fizzBuzz.printNumbers()
+        assertThat(strings[2]).isEqualTo("kuksa")
+    }
 }
