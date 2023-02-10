@@ -12,7 +12,7 @@ class FizzBuzzTest {
         val strings = fizzBuzz.printNumbers()
         assertThat(strings).hasSize(100)
         assertThat(strings.first()).isEqualTo("1")
-        assertThat(strings.last()).isEqualTo("100")
+        assertThat(strings.last()).isEqualTo("sauna")
     }
 
     @Test
@@ -33,5 +33,8 @@ class FizzBuzzTest {
 
         val strings = fizzBuzz.printNumbers()
         assertThat(strings[4]).isEqualTo("sauna")
+        assertThat(strings[9]).isEqualTo("sauna")
+        assertThat(strings[19]).isEqualTo("sauna")
+        assertThat(strings[99]).isEqualTo("sauna")
     }
 }

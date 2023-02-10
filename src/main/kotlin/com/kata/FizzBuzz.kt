@@ -7,7 +7,7 @@ class FizzBuzz {
                 .map {
                     if ( it % 3 == 0 ) {
                         "kuksa"
-                    } else if ( it == 5) {
+                    } else if ( it %5  == 0) {
                         "sauna"
                     }
                     else it.toString()
