@@ -1,7 +1,6 @@
 package com.kata
 
 import org.assertj.core.api.Assertions.assertThat
-import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
 
 class FizzBuzzTest {
@@ -36,5 +35,13 @@ class FizzBuzzTest {
         assertThat(strings[9]).isEqualTo("sauna")
         assertThat(strings[19]).isEqualTo("sauna")
         assertThat(strings[99]).isEqualTo("sauna")
+    }
+
+    @Test
+    fun `replace multiples of 15 with dip`() {
+        val fizzBuzz = FizzBuzz()
+
+        val strings = fizzBuzz.printNumbers()
+        assertThat(strings[14]).isEqualTo("dip")
     }
 }
