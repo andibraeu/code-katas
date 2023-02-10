@@ -8,7 +8,7 @@ class FizzBuzzTest {
     fun `returns list of numbers`() {
         val fizzBuzz = FizzBuzz()
 
-        val strings = fizzBuzz.printNumbers()
+        val strings = fizzBuzz.printNumbers(100)
         assertThat(strings).hasSize(100)
         assertThat(strings.first()).isEqualTo("1")
         assertThat(strings.last()).isEqualTo("sauna")
@@ -18,7 +18,7 @@ class FizzBuzzTest {
     fun `replace multiples of 3 with kuksa`() {
         val fizzBuzz = FizzBuzz()
 
-        val strings = fizzBuzz.printNumbers()
+        val strings = fizzBuzz.printNumbers(100)
         assertThat(strings[2]).isEqualTo("kuksa")
         assertThat(strings[5]).isEqualTo("kuksa")
         assertThat(strings[8]).isEqualTo("kuksa")
@@ -30,7 +30,7 @@ class FizzBuzzTest {
     fun `replace multiples of 5 with sauna`() {
         val fizzBuzz = FizzBuzz()
 
-        val strings = fizzBuzz.printNumbers()
+        val strings = fizzBuzz.printNumbers(100)
         assertThat(strings[4]).isEqualTo("sauna")
         assertThat(strings[9]).isEqualTo("sauna")
         assertThat(strings[19]).isEqualTo("sauna")
@@ -41,7 +41,7 @@ class FizzBuzzTest {
     fun `replace multiples of 15 with dip`() {
         val fizzBuzz = FizzBuzz()
 
-        val strings = fizzBuzz.printNumbers()
+        val strings = fizzBuzz.printNumbers(100)
         assertThat(strings[14]).isEqualTo("dip")
         assertThat(strings[29]).isEqualTo("dip")
         assertThat(strings[44]).isEqualTo("dip")
