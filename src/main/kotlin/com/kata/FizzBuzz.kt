@@ -5,7 +5,7 @@ class FizzBuzz {
     fun printNumbers(): List<String> {
         return (1..100)
                 .map {
-                    if ( it ==  15) {
+                    if ( it % 15 == 0) {
                         "dip"
                     } else if ( it % 3 == 0 ) {
                         "kuksa"

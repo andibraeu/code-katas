@@ -43,5 +43,8 @@ class FizzBuzzTest {
 
         val strings = fizzBuzz.printNumbers()
         assertThat(strings[14]).isEqualTo("dip")
+        assertThat(strings[29]).isEqualTo("dip")
+        assertThat(strings[44]).isEqualTo("dip")
+        assertThat(strings[89]).isEqualTo("dip")
     }
 }
