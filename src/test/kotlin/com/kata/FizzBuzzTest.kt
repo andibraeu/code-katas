@@ -21,5 +21,9 @@ class FizzBuzzTest {
 
         val strings = fizzBuzz.printNumbers()
         assertThat(strings[2]).isEqualTo("kuksa")
+        assertThat(strings[5]).isEqualTo("kuksa")
+        assertThat(strings[8]).isEqualTo("kuksa")
+        assertThat(strings[11]).isEqualTo("kuksa")
+        assertThat(strings[98]).isEqualTo("kuksa")
     }
 }
