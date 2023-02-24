@@ -17,7 +17,7 @@ class Ohce {
 
         return if (input.startsWith("ohce "))
             greeting(input.split(" ")[1])
-        else
-            reverseWord(input)
+        else if(isPalindrome(input)) "${input}\n¡Bonita palabra!"
+            else reverseWord(input)
     }
 }
