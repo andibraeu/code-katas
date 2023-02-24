@@ -14,4 +14,14 @@ internal class OhceTest {
         val reverseWord = Ohce().reverseWord("hello")
         assertThat(reverseWord).isEqualTo("olleh")
     }
+
+    @Test fun `reverse palindrome`() {
+        val ohce = Ohce()
+        val word = "anna"
+        val reverseWord = ohce.reverseWord(word)
+        val isPalindrome = ohce.isPalindrome(word)
+
+        assertThat(reverseWord).isEqualTo(word)
+        assertThat(isPalindrome).isTrue
+    }
 }
