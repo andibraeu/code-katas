@@ -6,6 +6,6 @@ class Ohce {
     }
 
     fun isPalindrome(word: String): Boolean{
-        return true
+        return word == reverseWord(word)
     }
 }
