@@ -9,4 +9,9 @@ internal class OhceTest {
         val reverseWord = Ohce().reverseWord("a")
        assertThat(reverseWord).isEqualTo("a")
     }
+
+    @Test fun `reverse multiple character`() {
+        val reverseWord = Ohce().reverseWord("hello")
+        assertThat(reverseWord).isEqualTo("olleh")
+    }
 }
