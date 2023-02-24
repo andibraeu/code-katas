@@ -1,9 +1,7 @@
 package com.kata
 
-import java.time.Instant
-
 class Ohce {
-    fun reverseWord(word: String): String {
+    private fun reverseWord(word: String): String {
         return word.reversed()
     }
 
@@ -11,7 +9,15 @@ class Ohce {
         return word == reverseWord(word)
     }
 
-    fun greeting(name: String): String {
+    private fun greeting(name: String): String {
         return "¡Buenos días $name!"
+    }
+
+    fun generateOutput(input: String): String {
+
+        return if (input.startsWith("ohce "))
+            greeting(input.split(" ")[1])
+        else
+            reverseWord(input)
     }
 }

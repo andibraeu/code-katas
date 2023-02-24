@@ -6,19 +6,19 @@ import org.junit.jupiter.api.*
 internal class OhceTest {
 
     @Test fun `return single character`() {
-        val reverseWord = Ohce().reverseWord("a")
+        val reverseWord = Ohce().generateOutput("a")
        assertThat(reverseWord).isEqualTo("a")
     }
 
     @Test fun `reverse multiple character`() {
-        val reverseWord = Ohce().reverseWord("hello")
+        val reverseWord = Ohce().generateOutput("hello")
         assertThat(reverseWord).isEqualTo("olleh")
     }
 
     @Test fun `reverse palindrome`() {
         val ohce = Ohce()
         val word = "anna"
-        val reverseWord = ohce.reverseWord(word)
+        val reverseWord = ohce.generateOutput(word)
         val isPalindrome = ohce.isPalindrome(word)
 
         assertThat(reverseWord).isEqualTo(word)
@@ -28,7 +28,7 @@ internal class OhceTest {
     @Test fun `reverse non-palindrome`() {
         val ohce = Ohce()
         val word = "andreas"
-        val reverseWord = ohce.reverseWord(word)
+        val reverseWord = ohce.generateOutput(word)
         val isPalindrome = ohce.isPalindrome(word)
 
         assertThat(reverseWord).isNotEqualTo(word)
@@ -36,7 +36,7 @@ internal class OhceTest {
     }
 
     @Test fun `greet user`() {
-        val result = Ohce().greeting("Moni")
+        val result = Ohce().generateOutput("ohce Moni")
 
         assertThat(result).isEqualTo("¡Buenos días Moni!")
     }
