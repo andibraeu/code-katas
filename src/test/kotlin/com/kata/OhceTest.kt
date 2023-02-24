@@ -34,4 +34,10 @@ internal class OhceTest {
         assertThat(reverseWord).isNotEqualTo(word)
         assertThat(isPalindrome).isFalse
     }
+
+    @Test fun `greet user`() {
+        val result = Ohce().greeting("Moni")
+
+        assertThat(result).isEqualTo("¡Buenos días Moni!")
+    }
 }
