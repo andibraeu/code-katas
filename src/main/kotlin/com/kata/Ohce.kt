@@ -3,12 +3,12 @@ package com.kata
 class Ohce {
 
     internal var name = ""
-    fun generateOutput(input: String): String {
+    fun generateOutput(input: String): Pair<String, Boolean> {
         return when {
-            input.startsWith("ohce ") -> greeting(input.split(" ")[1])
-            input == "Stop!" -> goodBye()
-            isPalindrome(input) -> "${input}\n¡Bonita palabra!"
-            else -> reverseWord(input)
+            input.startsWith("ohce ") -> Pair(greeting(input.split(" ")[1]), true)
+            input == "Stop!" -> Pair(goodBye(), false)
+            isPalindrome(input) -> Pair("${input}\n¡Bonita palabra!", true)
+            else -> Pair(reverseWord(input), true)
         }
     }
     private fun reverseWord(word: String) = word.reversed()
@@ -26,8 +26,11 @@ class Ohce {
 
 fun main() {
     val ohce = Ohce()
-    while (true) {
-        val readLine = readLine()
-        println(ohce.generateOutput(readLine!!))
+    var continueLoop = true
+    while (continueLoop) {
+        val lineOfText = readLine()
+        val output = ohce.generateOutput(lineOfText!!)
+        println(output.first)
+        continueLoop = output.second
     }
 }
