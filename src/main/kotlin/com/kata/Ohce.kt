@@ -4,6 +4,7 @@ class Ohce {
     fun generateOutput(input: String): String {
         return if (input.startsWith("ohce "))
             greeting(input.split(" ")[1])
+        else if (input == "Stop!") goodBye()
         else if(isPalindrome(input)) "${input}\n¡Bonita palabra!"
         else reverseWord(input)
     }
@@ -13,5 +14,6 @@ class Ohce {
 
     private fun greeting(name: String) = "¡Buenos días $name!"
 
+    private fun goodBye() = "Adios"
 
 }
