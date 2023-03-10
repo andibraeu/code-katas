@@ -32,9 +32,11 @@ internal class OhceTest {
     }
 
     @Test fun `greet user`() {
-        val result = Ohce().generateOutput("ohce Moni")
+        val ohce = Ohce()
+        val result = ohce.generateOutput("ohce Moni")
 
         assertThat(result).isEqualTo("¡Buenos días Moni!")
+        assertThat(ohce.name).isEqualTo("Moni")
     }
 
     @Test
