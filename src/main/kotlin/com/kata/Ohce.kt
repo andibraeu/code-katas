@@ -2,11 +2,12 @@ package com.kata
 
 class Ohce {
     fun generateOutput(input: String): String {
-        return if (input.startsWith("ohce "))
-            greeting(input.split(" ")[1])
-        else if (input == "Stop!") goodBye()
-        else if(isPalindrome(input)) "${input}\n¡Bonita palabra!"
-        else reverseWord(input)
+        return when {
+            input.startsWith("ohce ") -> greeting(input.split(" ")[1])
+            input == "Stop!" -> goodBye()
+            isPalindrome(input) -> "${input}\n¡Bonita palabra!"
+            else -> reverseWord(input)
+        }
     }
     private fun reverseWord(word: String) = word.reversed()
 
