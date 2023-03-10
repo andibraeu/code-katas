@@ -20,7 +20,7 @@ class Ohce {
         return "¡Buenos días $name!"
     }
 
-    private fun goodBye() = "Adios"
+    private fun goodBye() = "Adios $name"
 
 }
 

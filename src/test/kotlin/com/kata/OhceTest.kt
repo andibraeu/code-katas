@@ -41,8 +41,10 @@ internal class OhceTest {
 
     @Test
     fun `say adios`() {
-        val result = Ohce().generateOutput("Stop!")
+        val ohce = Ohce()
+        ohce.generateOutput("ohce Eva")
+        val result = ohce.generateOutput("Stop!")
 
-        assertThat(result).isEqualTo("Adios")
+        assertThat(result).isEqualTo("Adios Eva")
     }
 }
