@@ -1,11 +1,14 @@
 package com.kata
 
+import java.time.Instant
+import java.time.ZoneOffset
+
 class Ohce {
 
     internal var name = ""
-    fun generateOutput(input: String): Pair<String, Boolean> {
+    fun generateOutput(input: String, currentTime: Instant): Pair<String, Boolean> {
         return when {
-            input.startsWith("ohce ") -> Pair(greeting(input.split(" ")[1]), true)
+            input.startsWith("ohce ") -> Pair(greeting(input.split(" ")[1], currentTime), true)
             input == "Stop!" -> Pair(goodBye(), false)
             isPalindrome(input) -> Pair("${input}\n¡Bonita palabra!", true)
             else -> Pair(reverseWord(input), true)
@@ -15,9 +18,13 @@ class Ohce {
 
     private fun isPalindrome(word: String) = word == reverseWord(word)
 
-    private fun greeting(name: String): String {
+    private fun greeting(name: String, currentTime: Instant): String {
         this.name = name
-        return "¡Buenos días $name!"
+        val hour = currentTime.atZone(ZoneOffset.UTC).hour
+        if (hour < 6)  return "¡Buenas noches $name!"
+        else if (hour in 6..11)  return "¡Buenos días $name!"
+        else if (hour >= 20)  return "¡Buenas noches $name!"
+        else return "¡Buenas tardes $name!"
     }
 
     private fun goodBye() = "Adios $name"
@@ -29,7 +36,7 @@ fun main() {
     var continueLoop = true
     while (continueLoop) {
         val lineOfText = readLine()
-        val output = ohce.generateOutput(lineOfText!!)
+        val output = ohce.generateOutput(lineOfText!!, Instant.now())
         println(output.first)
         continueLoop = output.second
     }
