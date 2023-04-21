@@ -21,10 +21,12 @@ class Ohce {
     private fun greeting(name: String, currentTime: Instant): String {
         this.name = name
         val hour = currentTime.atZone(ZoneOffset.UTC).hour
-        if (hour < 6)  return "¡Buenas noches $name!"
-        else if (hour in 6..11)  return "¡Buenos días $name!"
-        else if (hour >= 20)  return "¡Buenas noches $name!"
-        else return "¡Buenas tardes $name!"
+        return when {
+            hour < 6 -> "¡Buenas noches $name!"
+            hour in 6..11 -> "¡Buenos días $name!"
+            hour >= 20 -> "¡Buenas noches $name!"
+            else -> "¡Buenas tardes $name!"
+        }
     }
 
     private fun goodBye() = "Adios $name"
