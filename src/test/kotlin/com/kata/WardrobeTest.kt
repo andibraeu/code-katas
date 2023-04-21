@@ -1,11 +1,13 @@
 package com.kata
 
+import com.kata.Size.TINY
+import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.*
-import org.junit.jupiter.api.Assertions.*
 
 internal class WardrobeTest {
 
-    @Test fun greeting() {
-        assertEquals("Hello World", Wardrobe().greeting())
+    @Test fun `find 250 sized combinations`() {
+        val greeting = Wardrobe().getAll250CmCombinations()
+        assertThat(greeting).contains(listOf(TINY,TINY,TINY,TINY,TINY))
     }
 }
