@@ -30,7 +30,7 @@ class Wardrobe {
         return totalSize to candidate
     }
 
-
+    // maybe a simple recursion is not the right approach. We might need a tree that represents all candidates.
     private fun recursion(candidate: List<Size>): List<Size>? {
         var totalSize = candidate.sumBy { it.size }
         if (totalSize > 250) return null
