@@ -22,6 +22,16 @@ internal class WardrobeTest {
         greeting.forEach { assertThat(it).doesNotContain(LARGE) }
     }
 
+    @Test
+    fun `create wardrobe tree`() {
+        val tree = Wardrobe().createTree()
+
+        assertThat(tree.value).isNull()
+        assertThat(tree.children).hasSize(4)
+        val sizes = tree.children.map { it.value }
+        assertThat(sizes).containsExactlyElementsOf(Size.values().toMutableList())
+    }
+
     // TODO find all candidates
 
     // TODO refactor to usage of recursion

@@ -37,12 +37,25 @@ class Wardrobe {
         else if (totalSize == 250) return candidate
         else return recursion(candidate + Size.MEDIUM)
     }
+
+    fun createTree(): WardrobeNode {
+        return WardrobeNode(null, createWardrobeBranches(0))
+    }
+
+    private fun createWardrobeBranches(depth: Int): List<WardrobeNode> {
+        if (depth == 5) {
+            return emptyList()
+        }
+        return Size.values().map {
+            WardrobeNode(it, createWardrobeBranches(depth + 1))
+        }
+    }
 }
 
 enum class Size(val size: Int, val price: Int) {
     TINY(50, 59),
 
-    //    SMALL(75, 62),
+    SMALL(75, 62),
     MEDIUM(100, 90),
     LARGE(120, 111)
 }
