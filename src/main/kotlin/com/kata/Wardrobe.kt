@@ -42,13 +42,28 @@ class Wardrobe {
         return WardrobeNode(null, createWardrobeBranches(0))
     }
 
+    fun findLeafNodePaths(
+        node: WardrobeNode,
+        result: MutableList<List<Size?>>,
+        path: MutableList<Size?>): MutableList<List<Size?>> {
+        path.add(node.value)
+        if (!WardrobeNode.hasChildren(node)) { // leaf node
+            result.add(path.map { it }) // add path to the result
+            path.removeLast()
+        } else {
+            for (child in node.children) {
+                findLeafNodePaths(child, result, path)
+            }
+            path.removeLast()
+        }
+        return result
+    }
+
     private fun createWardrobeBranches(depth: Int): List<WardrobeNode> {
-        if (depth == 5) {
-            return emptyList()
-        }
-        return Size.values().map {
-            WardrobeNode(it, createWardrobeBranches(depth + 1))
-        }
+        return depth
+            .takeIf { it == 5 }
+            ?.let { emptyList() }
+            ?: Size.values().map { WardrobeNode(it, createWardrobeBranches(depth + 1)) }
     }
 }
 

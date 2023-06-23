@@ -2,6 +2,7 @@ package com.kata
 
 import com.kata.Size.LARGE
 import com.kata.Size.MEDIUM
+import com.kata.Size.SMALL
 import com.kata.Size.TINY
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
@@ -30,6 +31,31 @@ internal class WardrobeTest {
         assertThat(tree.children).hasSize(4)
         val sizes = tree.children.map { it.value }
         assertThat(sizes).containsExactlyElementsOf(Size.values().toMutableList())
+    }
+
+    @Test
+    fun `check all paths`() {
+        val wardrobe = Wardrobe()
+        val tree = WardrobeNode(null, listOf(
+            WardrobeNode(SMALL, listOf(WardrobeNode(LARGE))),
+            WardrobeNode(MEDIUM))
+        )
+
+        val paths = wardrobe.findLeafNodePaths(tree, mutableListOf(), mutableListOf())
+        println(paths)
+        assertThat(paths.size).isEqualTo(2)
+
+    }
+
+    @Test
+    fun `has node children`() {
+        val tree = WardrobeNode(null, listOf(
+            WardrobeNode(SMALL, listOf(WardrobeNode(LARGE))),
+            WardrobeNode(MEDIUM))
+        )
+
+        assertThat(WardrobeNode.hasChildren(tree)).isTrue()
+        assertThat(WardrobeNode.hasChildren(WardrobeNode(MEDIUM))).isFalse()
     }
 
     // TODO find all candidates
