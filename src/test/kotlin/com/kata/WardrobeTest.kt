@@ -36,14 +36,16 @@ internal class WardrobeTest {
     @Test
     fun `check all paths`() {
         val wardrobe = Wardrobe()
-        val tree = WardrobeNode(null, listOf(
-            WardrobeNode(SMALL, listOf(WardrobeNode(LARGE))),
-            WardrobeNode(MEDIUM))
-        )
+        val tree = wardrobe.createTree()
+
 
         val paths = wardrobe.findLeafNodePaths(tree, mutableListOf(), mutableListOf())
-        println(paths)
-        assertThat(paths.size).isEqualTo(2)
+
+        val newPAth = paths.map { path ->
+            path.filterNotNull().sortedBy { it.size }
+        }.toSet()
+        println(newPAth)
+        assertThat(newPAth.size).isEqualTo(2)
 
     }
 
