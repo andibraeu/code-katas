@@ -11,10 +11,16 @@ internal class WardrobeTest {
 
     @Test
     fun `find 250 sized combinations`() {
-        val greeting = Wardrobe().getAll250CmCombinations()
-        assertThat(greeting).contains(listOf(TINY, TINY, TINY, TINY, TINY))
-        assertThat(greeting).contains(listOf(MEDIUM, TINY, TINY, TINY))
-        assertThat(greeting).contains(listOf(MEDIUM, MEDIUM, TINY))
+        val result = Wardrobe().getAll250CmCombinations()
+
+        result.forEach {
+            val size = it.sumBy { it.size }
+            println("$it $size")
+        }
+
+        assertThat(result).contains(listOf(TINY, TINY, TINY, TINY, TINY))
+        assertThat(result).contains(listOf(TINY, TINY, TINY, MEDIUM))
+        assertThat(result).contains(listOf(TINY, MEDIUM, MEDIUM))
     }
 
     @Test
@@ -34,7 +40,7 @@ internal class WardrobeTest {
     }
 
     @Test
-    fun `check all paths`() {
+    fun `check all paths without duplicates`() {
         val wardrobe = Wardrobe()
         val tree = wardrobe.createTree()
 

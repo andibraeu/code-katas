@@ -1,33 +1,24 @@
 package com.kata
 
-import com.kata.Size.TINY
-
 class Wardrobe {
     fun getAll250CmCombinations(): List<List<Size>> {
-        val resultList = mutableListOf<List<Size>>()
 
-        Size.values().forEach {
-            val (totalSize, candidate) = findCandidate(it)
+        val candidates = findAllCandidates(createTree(), mutableListOf())
+        return candidates.map {
+            var sum = 0
 
-            if (totalSize == 250) {
-                resultList.add(candidate)
+            val fitOrHigher = mutableListOf<Size>()
+            it.forEach { size ->
+                sum += size!!.size
+
+                if (sum <= 250) {
+                    fitOrHigher.add(size)
+                }
             }
+            fitOrHigher
         }
-
-        return resultList
-    }
-
-    private fun findCandidate(size: Size): Pair<Int, List<Size>> {
-        val candidate = mutableListOf<Size>()
-
-        candidate.add(size)
-        var totalSize = candidate.sumBy { it.size }
-
-        while (totalSize < 250) {
-            candidate.add(TINY)
-            totalSize = candidate.sumBy { it.size }
-        }
-        return totalSize to candidate
+                .filter { it.sumBy { it.size } == 250 }
+                .distinct()
     }
 
     fun createTree(): WardrobeNode {
@@ -68,9 +59,3 @@ enum class Size(val size: Int, val price: Int) {
     MEDIUM(100, 90),
     LARGE(120, 111)
 }
-
-// 50 50 50 50 50
-// 100 50 50 50
-// 100 100 50
-
-
