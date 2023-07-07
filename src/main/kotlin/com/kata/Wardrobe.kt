@@ -30,22 +30,14 @@ class Wardrobe {
         return totalSize to candidate
     }
 
-    // maybe a simple recursion is not the right approach. We might need a tree that represents all candidates.
-    private fun recursion(candidate: List<Size>): List<Size>? {
-        var totalSize = candidate.sumBy { it.size }
-        if (totalSize > 250) return null
-        else if (totalSize == 250) return candidate
-        else return recursion(candidate + Size.MEDIUM)
-    }
-
     fun createTree(): WardrobeNode {
         return WardrobeNode(null, createWardrobeBranches(0))
     }
 
     fun findLeafNodePaths(
-        node: WardrobeNode,
-        result: MutableList<List<Size?>>,
-        path: MutableList<Size?>): MutableList<List<Size?>> {
+            node: WardrobeNode,
+            result: MutableList<List<Size?>>,
+            path: MutableList<Size?>): MutableList<List<Size?>> {
         path.add(node.value)
         if (!WardrobeNode.hasChildren(node)) { // leaf node
             result.add(path.map { it }) // add path to the result
@@ -59,12 +51,10 @@ class Wardrobe {
         return result
     }
 
-    private fun createWardrobeBranches(depth: Int): List<WardrobeNode> {
-        return depth
-            .takeIf { it == 5 }
-            ?.let { emptyList() }
-            ?: Size.values().map { WardrobeNode(it, createWardrobeBranches(depth + 1)) }
-    }
+    private fun createWardrobeBranches(depth: Int): List<WardrobeNode> =
+            emptyList<WardrobeNode>()
+                    .takeIf { depth == 5 }
+                    ?: Size.values().map { WardrobeNode(it, createWardrobeBranches(depth + 1)) }
 }
 
 enum class Size(val size: Int, val price: Int) {

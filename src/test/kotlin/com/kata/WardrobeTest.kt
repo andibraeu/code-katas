@@ -38,22 +38,17 @@ internal class WardrobeTest {
         val wardrobe = Wardrobe()
         val tree = wardrobe.createTree()
 
-
         val paths = wardrobe.findLeafNodePaths(tree, mutableListOf(), mutableListOf())
-
-        val newPAth = paths.map { path ->
-            path.filterNotNull().sortedBy { it.size }
-        }.toSet()
-        println(newPAth)
-        assertThat(newPAth.size).isEqualTo(2)
+        
+        assertThat(paths.size).isEqualTo(56)
 
     }
 
     @Test
     fun `has node children`() {
         val tree = WardrobeNode(null, listOf(
-            WardrobeNode(SMALL, listOf(WardrobeNode(LARGE))),
-            WardrobeNode(MEDIUM))
+                WardrobeNode(SMALL, listOf(WardrobeNode(LARGE))),
+                WardrobeNode(MEDIUM))
         )
 
         assertThat(WardrobeNode.hasChildren(tree)).isTrue()
