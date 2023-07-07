@@ -61,9 +61,6 @@ internal class WardrobeTest {
         assertThat(WardrobeNode.hasChildren(WardrobeNode(MEDIUM))).isFalse()
     }
 
-    // TODO find all candidates
-
-    // TODO refactor to usage of recursion
-
+    // TODO reduce amount of iterations over lists
     // TODO prices
 }
