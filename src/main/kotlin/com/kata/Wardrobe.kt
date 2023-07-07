@@ -34,17 +34,21 @@ class Wardrobe {
         return WardrobeNode(null, createWardrobeBranches(0))
     }
 
-    fun findLeafNodePaths(
+    fun findAllCandidates(
             node: WardrobeNode,
-            result: MutableList<List<Size?>>,
-            path: MutableList<Size?>): MutableList<List<Size?>> {
+            result: MutableList<List<Size?>>): Set<List<Size?>> =
+            findPaths(mutableListOf(), node, result)
+                    .map { path -> path.filterNotNull().sortedBy { it.size } }
+                    .toSet()
+
+    private fun findPaths(path: MutableList<Size?>, node: WardrobeNode, result: MutableList<List<Size?>>): MutableList<List<Size?>> {
         path.add(node.value)
         if (!WardrobeNode.hasChildren(node)) { // leaf node
             result.add(path.map { it }) // add path to the result
             path.removeLast()
         } else {
             for (child in node.children) {
-                findLeafNodePaths(child, result, path)
+                findPaths(path, child, result)
             }
             path.removeLast()
         }

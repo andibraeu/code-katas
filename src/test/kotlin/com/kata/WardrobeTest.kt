@@ -38,8 +38,8 @@ internal class WardrobeTest {
         val wardrobe = Wardrobe()
         val tree = wardrobe.createTree()
 
-        val paths = wardrobe.findLeafNodePaths(tree, mutableListOf(), mutableListOf())
-        
+        val paths = wardrobe.findAllCandidates(tree, mutableListOf())
+
         assertThat(paths.size).isEqualTo(56)
 
     }
