@@ -104,4 +104,29 @@ class ScoreKeeperTest {
 
         assertThat(score).isEqualTo("000:015")
     }
+
+    @Test
+    fun createPointsForTeamAandB() {
+        val scoreKeeper = ScoreKeeper()
+
+        scoreKeeper.scoreTeamB3()
+        scoreKeeper.scoreTeamB3()
+        scoreKeeper.scoreTeamB2()
+        scoreKeeper.scoreTeamB3()
+        scoreKeeper.scoreTeamB1()
+        scoreKeeper.scoreTeamB3()
+
+        scoreKeeper.scoreTeamA3()
+        scoreKeeper.scoreTeamA3()
+        scoreKeeper.scoreTeamA2()
+        scoreKeeper.scoreTeamA3()
+        scoreKeeper.scoreTeamA3()
+        scoreKeeper.scoreTeamA1()
+        scoreKeeper.scoreTeamA3()
+        scoreKeeper.scoreTeamA2()
+        
+        val score = scoreKeeper.getScore()
+
+        assertThat(score).isEqualTo("020:015")
+    }
 }
