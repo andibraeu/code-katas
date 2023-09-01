@@ -18,35 +18,21 @@ class TennisGame1(private val player1Name: String, private val player2Name: Stri
         } else if (m_score1 >= 4 || m_score2 >= 4) {
             score = winOrAdvantage()
         } else {
-            score = scoreByPlayer(score)
+            score = scoreByPlayer()
         }
         return score
     }
 
-    private fun scoreByPlayer(score: String): String {
-        var tempScore1: Int
-        var score1 = score
-        for (i in 1..2) {
-            if (i == 1)
-                tempScore1 = m_score1
-            else {
-                score1 += "-"
-                tempScore1 = m_score2
-            }
-            score1 = scoreToName(tempScore1, score1)
-        }
-        return score1
-    }
+    private fun scoreByPlayer() = "${scoreToName(m_score1)}-${scoreToName(m_score2)}"
 
-    private fun scoreToName(tempScore: Int, score1: String): String {
-        var score11 = score1
-        when (tempScore) {
-            0 -> score11 += "Love"
-            1 -> score11 += "Fifteen"
-            2 -> score11 += "Thirty"
-            3 -> score11 += "Forty"
+    private fun scoreToName(tempScore: Int): String {
+        return when (tempScore) {
+            0 -> "Love"
+            1 -> "Fifteen"
+            2 -> "Thirty"
+            3 -> "Forty"
+            else -> ""
         }
-        return score11
     }
 
     private fun winOrAdvantage(): String {
