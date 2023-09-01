@@ -10,17 +10,10 @@ class TennisGame1(private val player1Name: String, private val player2Name: Stri
             m_score2 += 1
     }
 
-    override fun getScore(): String {
-        var score = ""
-
-        if (m_score1 == m_score2) {
-            score = handleEqualScore()
-        } else if (m_score1 >= 4 || m_score2 >= 4) {
-            score = winOrAdvantage()
-        } else {
-            score = scoreByPlayer()
-        }
-        return score
+    override fun getScore() = when {
+        m_score1 == m_score2 -> handleEqualScore()
+        m_score1 >= 4 || m_score2 >= 4 -> winOrAdvantage()
+        else -> scoreByPlayer()
     }
 
     private fun scoreByPlayer() = "${scoreToName(m_score1)}-${scoreToName(m_score2)}"
@@ -30,8 +23,7 @@ class TennisGame1(private val player1Name: String, private val player2Name: Stri
             0 -> "Love"
             1 -> "Fifteen"
             2 -> "Thirty"
-            3 -> "Forty"
-            else -> ""
+            else -> "Forty"
         }
     }
 
@@ -55,3 +47,4 @@ class TennisGame1(private val player1Name: String, private val player2Name: Stri
         }
     }
 }
+
