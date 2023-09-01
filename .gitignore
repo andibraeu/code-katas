@@ -10,3 +10,4 @@ build
 # IntelliJ files
 *.iml
 .idea/
+/target/
