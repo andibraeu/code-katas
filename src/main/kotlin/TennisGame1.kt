@@ -12,40 +12,60 @@ class TennisGame1(private val player1Name: String, private val player2Name: Stri
 
     override fun getScore(): String {
         var score = ""
-        var tempScore = 0
+
         if (m_score1 == m_score2) {
-            when (m_score1) {
-                0 -> score = "Love-All"
-                1 -> score = "Fifteen-All"
-                2 -> score = "Thirty-All"
-                else -> score = "Deuce"
-            }
+            score = handleEqualScore()
         } else if (m_score1 >= 4 || m_score2 >= 4) {
-            val minusResult = m_score1 - m_score2
-            if (minusResult == 1)
-                score = "Advantage $player1Name"
-            else if (minusResult == -1)
-                score = "Advantage $player2Name"
-            else if (minusResult >= 2)
-                score = "Win for $player1Name"
-            else
-                score = "Win for $player2Name"
+            score = winOrAdvantage()
         } else {
-            for (i in 1..2) {
-                if (i == 1)
-                    tempScore = m_score1
-                else {
-                    score += "-"
-                    tempScore = m_score2
-                }
-                when (tempScore) {
-                    0 -> score += "Love"
-                    1 -> score += "Fifteen"
-                    2 -> score += "Thirty"
-                    3 -> score += "Forty"
-                }
-            }
+            score = scoreByPlayer(score)
         }
         return score
+    }
+
+    private fun scoreByPlayer(score: String): String {
+        var tempScore1: Int
+        var score1 = score
+        for (i in 1..2) {
+            if (i == 1)
+                tempScore1 = m_score1
+            else {
+                score1 += "-"
+                tempScore1 = m_score2
+            }
+            score1 = scoreToName(tempScore1, score1)
+        }
+        return score1
+    }
+
+    private fun scoreToName(tempScore: Int, score1: String): String {
+        var score11 = score1
+        when (tempScore) {
+            0 -> score11 += "Love"
+            1 -> score11 += "Fifteen"
+            2 -> score11 += "Thirty"
+            3 -> score11 += "Forty"
+        }
+        return score11
+    }
+
+    private fun winOrAdvantage(): String {
+        val difference = m_score1 - m_score2
+        return when {
+            difference == 1 -> "Advantage $player1Name"
+            difference == -1 -> "Advantage $player2Name"
+            difference >= 2 -> "Win for $player1Name"
+            else -> "Win for $player2Name"
+        }
+
+    }
+
+    private fun handleEqualScore(): String {
+        return when (m_score1) {
+            0 -> "Love-All"
+            1 -> "Fifteen-All"
+            2 -> "Thirty-All"
+            else -> "Deuce"
+        }
     }
 }
