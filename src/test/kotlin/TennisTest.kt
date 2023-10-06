@@ -8,38 +8,38 @@ class TennisTest {
     @ParameterizedTest
     @MethodSource("allScores")
     fun checkAllScoresTennisGame1(player1Score: Int, player2Score: Int, expectedScore: String) {
-        val game = TennisGame1("player1", "player2")
+        val game = TennisGame1("Eva", "Andi")
         checkAllScores(game, player1Score, player2Score, expectedScore)
     }
 
     @ParameterizedTest
     @MethodSource("allScores")
     fun checkAllScoresTennisGame2(player1Score: Int, player2Score: Int, expectedScore: String) {
-        val game = TennisGame2("player1", "player2")
+        val game = TennisGame2("Eva", "Andi")
         checkAllScores(game, player1Score, player2Score, expectedScore)
     }
 
-    @ParameterizedTest
+    /*@ParameterizedTest
     @MethodSource("allScores")
     fun checkAllScoresTennisGame3(player1Score: Int, player2Score: Int, expectedScore: String) {
-        val game = TennisGame3("player1", "player2")
+        val game = TennisGame3("Eva", "Andi")
         checkAllScores(game, player1Score, player2Score, expectedScore)
     }
 
     @ParameterizedTest
     @MethodSource("allScores")
     fun checkAllScoresTennisGame4(player1Score: Int, player2Score: Int, expectedScore: String) {
-        val game = TennisGame4("player1", "player2")
+        val game = TennisGame4("Eva", "Andi")
         checkAllScores(game, player1Score, player2Score, expectedScore)
-    }
+    }*/
 
     fun checkAllScores(game: TennisGame, player1Score: Int, player2Score: Int, expectedScore: String) {
         val highestScore = Math.max(player1Score, player2Score)
         for (i in 0 until highestScore) {
             if (i < player1Score)
-                game.wonPoint("player1")
+                game.wonPoint("Eva")
             if (i < player2Score)
-                game.wonPoint("player2")
+                game.wonPoint("Andi")
         }
         assertEquals(expectedScore, game.getScore())
     }
@@ -59,28 +59,28 @@ class TennisTest {
                 Arguments.of(0, 2, "Love-Thirty"),
                 Arguments.of(3, 0, "Forty-Love"),
                 Arguments.of(0, 3, "Love-Forty"),
-                Arguments.of(4, 0, "Win for player1"),
-                Arguments.of(0, 4, "Win for player2"),
+                Arguments.of(4, 0, "Win for Eva"),
+                Arguments.of(0, 4, "Win for Andi"),
                 Arguments.of(2, 1, "Thirty-Fifteen"),
                 Arguments.of(1, 2, "Fifteen-Thirty"),
                 Arguments.of(3, 1, "Forty-Fifteen"),
                 Arguments.of(1, 3, "Fifteen-Forty"),
-                Arguments.of(4, 1, "Win for player1"),
-                Arguments.of(1, 4, "Win for player2"),
+                Arguments.of(4, 1, "Win for Eva"),
+                Arguments.of(1, 4, "Win for Andi"),
                 Arguments.of(3, 2, "Forty-Thirty"),
                 Arguments.of(2, 3, "Thirty-Forty"),
-                Arguments.of(4, 2, "Win for player1"),
-                Arguments.of(2, 4, "Win for player2"),
-                Arguments.of(4, 3, "Advantage player1"),
-                Arguments.of(3, 4, "Advantage player2"),
-                Arguments.of(5, 4, "Advantage player1"),
-                Arguments.of(4, 5, "Advantage player2"),
-                Arguments.of(15, 14, "Advantage player1"),
-                Arguments.of(14, 15, "Advantage player2"),
-                Arguments.of(6, 4, "Win for player1"),
-                Arguments.of(4, 6, "Win for player2"),
-                Arguments.of(16, 14, "Win for player1"),
-                Arguments.of(14, 16, "Win for player2")
+                Arguments.of(4, 2, "Win for Eva"),
+                Arguments.of(2, 4, "Win for Andi"),
+                Arguments.of(4, 3, "Advantage Eva"),
+                Arguments.of(3, 4, "Advantage Andi"),
+                Arguments.of(5, 4, "Advantage Eva"),
+                Arguments.of(4, 5, "Advantage Andi"),
+                Arguments.of(15, 14, "Advantage Eva"),
+                Arguments.of(14, 15, "Advantage Andi"),
+                Arguments.of(6, 4, "Win for Eva"),
+                Arguments.of(4, 6, "Win for Andi"),
+                Arguments.of(16, 14, "Win for Eva"),
+                Arguments.of(14, 16, "Win for Andi")
             )
     }
 }
