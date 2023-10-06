@@ -19,11 +19,7 @@ class TennisGame2(private val player1Name: String, private val player2Name: Stri
             score = "Deuce"
 
         if (p1point > 0 && p2point == 0) {
-            when (p1point) {
-                1 -> p1res = "Fifteen"
-                2 -> p1res = "Thirty"
-                3 -> p1res = "Forty"
-            }
+            p1res = resolvePointsToNames(p1point)
 
             p2res = "Love"
             score = "$p1res-$p2res"
@@ -77,6 +73,15 @@ class TennisGame2(private val player1Name: String, private val player2Name: Stri
             score = "Win for $player2Name"
         }
         return score
+    }
+
+    private fun resolvePointsToNames(point: Int): String {
+        return when (point) {
+            1 -> "Fifteen"
+            2 -> "Thirty"
+            3 -> "Forty"
+            else -> ""
+        }
     }
 
     fun setP1Score(number: Int) {
