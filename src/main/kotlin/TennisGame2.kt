@@ -3,24 +3,30 @@ class TennisGame2(private val player1Name: String, private val player2Name: Stri
     var p2point: Int = 0
 
     override fun getScore(): String {
-        var score = ""
-        if (p1point >= 4 && p2point >= 0 && p1point - p2point >= 2) {
-            score = "Win for $player1Name"
-        } else if (p2point >= 4 && p1point >= 0 && p2point - p1point >= 2) {
-            score = "Win for $player2Name"
-        } else if (p1point == p2point && p1point >= 3)
-            score = "Deuce"
-        else if (p1point == p2point)
-            score = "${resolvePointsToNames(p1point)}-All"
-        else if (p1point < 4 && p2point < 4)
-            score = "${resolvePointsToNames(p1point)}-${resolvePointsToNames(p2point)}"
-        else if (p1point > p2point && p2point >= 3)
-            score = "Advantage $player1Name"
-        else if (p2point > p1point && p1point >= 3)
-            score = "Advantage $player2Name"
+        return when {
+            p1point >= 4 && p2point >= 0 && p1point - p2point >= 2 ->
+                "Win for $player1Name"
 
+            p2point >= 4 && p1point >= 0 && p2point - p1point >= 2 ->
+                "Win for $player2Name"
 
-        return score
+            p1point == p2point && p1point >= 3 ->
+                "Deuce"
+
+            p1point == p2point ->
+                "${resolvePointsToNames(p1point)}-All"
+
+            p1point < 4 && p2point < 4 ->
+                "${resolvePointsToNames(p1point)}-${resolvePointsToNames(p2point)}"
+
+            p1point > p2point && p2point >= 3 ->
+                "Advantage $player1Name"
+
+            p2point > p1point && p1point >= 3 ->
+                "Advantage $player2Name"
+
+            else -> ""
+        }
     }
 
     private fun resolvePointsToNames(point: Int): String {
