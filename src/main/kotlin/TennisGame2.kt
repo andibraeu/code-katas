@@ -15,27 +15,26 @@ class TennisGame2(private val player1Name: String, private val player2Name: Stri
         }
     }
 
-    private fun resolvePointsToNames(point: Int): String {
-        return when (point) {
+    private fun resolvePointsToNames(point: Int) =
+        when (point) {
             0 -> "Love"
             1 -> "Fifteen"
             2 -> "Thirty"
             else -> "Forty"
         }
+
+    private fun setP1Score() {
+        p1point += 1
     }
 
-    fun setP1Score(number: Int) {
-        p1point += number
-    }
-
-    fun setP2Score(number: Int) {
-        p2point += number
+    private fun setP2Score() {
+        p2point += 1
     }
 
     override fun wonPoint(player: String) {
         if (player === player1Name)
-            setP1Score(1)
+            setP1Score()
         else
-            setP2Score(1)
+            setP2Score()
     }
 }
