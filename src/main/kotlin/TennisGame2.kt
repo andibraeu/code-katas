@@ -18,23 +18,7 @@ class TennisGame2(private val player1Name: String, private val player2Name: Stri
         if (p1point == p2point && p1point >= 3)
             score = "Deuce"
 
-        if (p1point > 0 && p2point == 0) {
-            p1res = resolvePointsToNames(p1point)
-            p2res = resolvePointsToNames(p2point)
-            score = "$p1res-$p2res"
-        }
-        if (p2point > 0 && p1point == 0) {
-            p2res = resolvePointsToNames(p2point)
-            p1res = "Love"
-            score = "$p1res-$p2res"
-        }
-
-        if (p1point > p2point && p1point < 4) {
-            p1res = resolvePointsToNames(p1point)
-            p2res = resolvePointsToNames(p2point)
-            score = "$p1res-$p2res"
-        }
-        if (p2point > p1point && p2point < 4) {
+        if (p1point < 4 && p2point < 4 && p1point != p2point) {
             p1res = resolvePointsToNames(p1point)
             p2res = resolvePointsToNames(p2point)
             score = "$p1res-$p2res"
