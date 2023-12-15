@@ -2,13 +2,15 @@ class TennisGame3(private val p1N: String, private val p2N: String) : TennisGame
 
     private var p2: Int = 0
     private var p1: Int = 0
+    private val p = mapOf(
+        0 to "Love",
+        1 to "Fifteen",
+        2 to "Thirty",
+        3 to "Forty")
 
     override fun getScore(): String {
         if (p1 < 4 && p2 < 4 && (p1 != 3 || p2 != 3)) {
-            val pointExpression: String
-            val p = arrayOf("Love", "Fifteen", "Thirty", "Forty")
-            pointExpression = p[p1]
-            return if (p1 == p2) "$pointExpression-All" else "$pointExpression-${p[p2]}"
+            return if (p1 == p2) "${p[p1]}-All" else "${p[p1]}-${p[p2]}"
         } else {
             if (p1 == p2)
                 return "Deuce"
@@ -24,5 +26,7 @@ class TennisGame3(private val p1N: String, private val p2N: String) : TennisGame
             this.p2 += 1
 
     }
+
+
 
 }
