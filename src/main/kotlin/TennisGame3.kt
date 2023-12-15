@@ -11,9 +11,10 @@ class TennisGame3(private val p1N: String, private val p2N: String) : TennisGame
     override fun getScore(): String {
         return when {
             p1 == p2 && p1 < 3 -> "${pointToNames[p1]}-All"
-            p1 < 4 && p2 < 4 && (p1 != 3 || p2 != 3) -> "${pointToNames[p1]}-${pointToNames[p2]}"
             p1 == p2 -> "Deuce"
-            else -> if (isAdvantage(p1, p2)) "Advantage ${getPlayerName(p1, p2)}" else "Win for ${getPlayerName(p1, p2)}"
+            p1 < 4 && p2 < 4 -> "${pointToNames[p1]}-${pointToNames[p2]}"
+            isAdvantage(p1, p2) -> "Advantage ${getPlayerName(p1, p2)}"
+            else ->  "Win for ${getPlayerName(p1, p2)}"
         }
     }
 
