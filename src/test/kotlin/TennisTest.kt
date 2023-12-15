@@ -19,13 +19,13 @@ class TennisTest {
         checkAllScores(game, player1Score, player2Score, expectedScore)
     }
 
-    /*@ParameterizedTest
+    @ParameterizedTest
     @MethodSource("allScores")
     fun checkAllScoresTennisGame3(player1Score: Int, player2Score: Int, expectedScore: String) {
         val game = TennisGame3("Eva", "Andi")
         checkAllScores(game, player1Score, player2Score, expectedScore)
     }
-
+/*
     @ParameterizedTest
     @MethodSource("allScores")
     fun checkAllScoresTennisGame4(player1Score: Int, player2Score: Int, expectedScore: String) {
