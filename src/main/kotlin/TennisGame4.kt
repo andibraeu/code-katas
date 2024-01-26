@@ -8,18 +8,13 @@ class TennisGame4(val server: String, val receiver: String) : TennisGame {
     }
 
     override fun getScore(): String {
-        val result: TennisResult = Deuce(
-            this, GameServer(
-                this, GameReceiver(
-                    this, AdvantageServer(
-                        this, AdvantageReceiver(
-                            this, DefaultResult(this)
-                        )
-                    )
-                )
-            )
-        ).result
-        return result.format()
+        return DefaultResult(this)
+            .let { AdvantageReceiver(this, it) }
+            .let { AdvantageServer(this, it) }
+            .let { GameReceiver(this, it) }
+            .let { GameServer(this, it) }
+            .let { Deuce(this, it) }
+            .result.format()
     }
 
     internal fun receiverHasAdvantage(): Boolean {
@@ -47,7 +42,7 @@ class TennisGame4(val server: String, val receiver: String) : TennisGame {
 internal class TennisResult(var serverScore: String, var receiverScore: String) {
     fun format(): String {
         if ("" == receiverScore) return serverScore
-        return if (serverScore == receiverScore) "$serverScore-All" else serverScore + "-" + receiverScore
+        return if (serverScore == receiverScore) "$serverScore-All" else "$serverScore-$receiverScore"
     }
 }
 
