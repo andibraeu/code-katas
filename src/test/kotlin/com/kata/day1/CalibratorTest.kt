@@ -1,23 +1,27 @@
 package com.kata.day1
 
+import java.util.stream.Stream
 import org.assertj.core.api.Assertions.assertThat
-import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.params.ParameterizedTest
+import org.junit.jupiter.params.provider.Arguments
+import org.junit.jupiter.params.provider.MethodSource
 
 class CalibratorTest {
 
     private val calibrator = Calibrator()
-    @Test
-    @Disabled
-    fun test() {
-        val result = calibrator.extractTwoDigits("1abc2")
-        assertThat(result).isEqualTo(12)
+
+    @ParameterizedTest
+    @MethodSource("testData")
+    fun test(line: String, number: Int) {
+        val result = calibrator.extractTwoDigits(line)
+        assertThat(result).isEqualTo(number)
     }
 
     @Test
     fun getDigitListFor2Digits() {
         val result = calibrator.findDigits("1abc2")
-        assertThat(result).containsExactly(1,2)
+        assertThat(result).containsExactly(1, 2)
     }
 
     @Test
@@ -29,8 +33,18 @@ class CalibratorTest {
     @Test
     fun getDigitListFor4Digits() {
         val result = calibrator.findDigits("a1b2c3d4e5f")
-        assertThat(result).containsExactly(1,2,3,4,5)
+        assertThat(result).containsExactly(1, 2, 3, 4, 5)
+    }
+
+    companion object {
+        @JvmStatic
+        fun testData(): Stream<Arguments> {
+            return Stream.of(
+                Arguments.of("1abc2", 12),
+            )
+        }
     }
 
 
 }
+
