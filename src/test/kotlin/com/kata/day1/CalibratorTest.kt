@@ -2,6 +2,7 @@ package com.kata.day1
 
 import java.util.stream.Stream
 import org.assertj.core.api.Assertions.assertThat
+import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.Arguments
@@ -20,11 +21,20 @@ class CalibratorTest {
     }
 
     @ParameterizedTest
-    @MethodSource("testData")
+    @MethodSource("testDataPartOne")
     fun `extract first and last digits`(line: String, number: Int) {
-        val result = calibrator.extractTwoDigits(line)
+        val result = calibrator.extractTwoDigits(line, false)
         assertThat(result).isEqualTo(number)
     }
+
+    @ParameterizedTest
+    @MethodSource("testDataPartTwo")
+    @Disabled
+    fun `extract first and last digits - part 2`(line: String, number: Int) {
+        val result = calibrator.extractTwoDigitsFromStringsAndDigits(line)
+        assertThat(result).isEqualTo(number)
+    }
+
 
     @Test
     fun getDigitListFor2Digits() {
@@ -45,10 +55,21 @@ class CalibratorTest {
     }
 
 
-    private fun testData() = Stream.of(
+    private fun testDataPartOne() = Stream.of(
         Arguments.of("1abc2", 12),
         Arguments.of("treb7uchet", 77),
         Arguments.of("a1b2c3d4e5f", 15),
+    )
+
+    private fun testDataPartTwo() = Stream.of(
+        Arguments.of("1abc2", 12),
+        Arguments.of("two1nine", 29),
+        Arguments.of("eightwothree", 83),
+        Arguments.of("abcone2threexyz", 13),
+        Arguments.of("xtwone3four", 24),
+        Arguments.of("4nineeightseven2", 42),
+        Arguments.of("zoneight234", 14),
+        Arguments.of("7pqrstsixteen", 76)
     )
 }
 

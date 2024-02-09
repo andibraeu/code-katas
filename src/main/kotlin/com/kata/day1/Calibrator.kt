@@ -4,15 +4,18 @@ import java.io.File
 
 class Calibrator {
     fun processList(lines: List<String>) =
-        lines.sumOf { extractTwoDigits(it) }
+        lines.sumOf { extractTwoDigits(it, false) }
 
-    internal fun extractTwoDigits(line: String) =
+    internal fun extractTwoDigits(line: String, withStringNumbers: Boolean) =
         findDigits(line).first() * 10 + findDigits(line).last()
 
     internal fun findDigits(line: String) =
         line.toCharArray()
             .filter { it.isDigit() }
             .map { it.digitToInt() }
+
+    fun extractTwoDigitsFromStringsAndDigits(line: String) =
+        extractTwoDigits(line, true)
 }
 
 fun main() {
