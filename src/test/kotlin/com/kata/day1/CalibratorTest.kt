@@ -39,8 +39,8 @@ class CalibratorTest {
 
     private fun testData() = Stream.of(
         Arguments.of("1abc2", 12),
+        Arguments.of("treb7uchet", 77),
+        Arguments.of("a1b2c3d4e5f", 15),
     )
-
-
 }
 

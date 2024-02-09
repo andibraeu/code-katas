@@ -4,9 +4,7 @@ class Calibrator {
 
     fun calculateResult() = 0
     fun extractTwoDigits(line: String): Int {
-        findDigits(line)
-        return 12
-
+        return findDigits(line).first() * 10 + findDigits(line).last()
     }
 
     fun findDigits(line: String): List<Int> {
