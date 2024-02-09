@@ -1,5 +1,7 @@
 package com.kata.day1
 
+import java.io.File
+
 class Calibrator {
     fun processList(lines: List<String>) =
         lines.sumOf { extractTwoDigits(it) }
@@ -11,4 +13,10 @@ class Calibrator {
         line.toCharArray()
             .filter { it.isDigit() }
             .map { it.digitToInt() }
+}
+
+fun main() {
+    val list = File("src/main/resources/input.txt").bufferedReader().readLines()
+
+    println(Calibrator().processList(list))
 }
