@@ -36,14 +36,10 @@ class CalibratorTest {
         assertThat(result).containsExactly(1, 2, 3, 4, 5)
     }
 
-    companion object {
-        @JvmStatic
-        fun testData(): Stream<Arguments> {
-            return Stream.of(
-                Arguments.of("1abc2", 12),
-            )
-        }
-    }
+
+    private fun testData() = Stream.of(
+        Arguments.of("1abc2", 12),
+    )
 
 
 }
