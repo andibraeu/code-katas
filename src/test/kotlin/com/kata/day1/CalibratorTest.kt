@@ -2,7 +2,6 @@ package com.kata.day1
 
 import java.util.stream.Stream
 import org.assertj.core.api.Assertions.assertThat
-import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.Arguments
@@ -23,13 +22,12 @@ class CalibratorTest {
     @ParameterizedTest
     @MethodSource("testDataPartOne")
     fun `extract first and last digits`(line: String, number: Int) {
-        val result = calibrator.extractTwoDigits(line, false)
+        val result = calibrator.extractTwoDigits(line)
         assertThat(result).isEqualTo(number)
     }
 
     @ParameterizedTest
     @MethodSource("testDataPartTwo")
-    @Disabled
     fun `extract first and last digits - part 2`(line: String, number: Int) {
         val result = calibrator.extractTwoDigitsFromStringsAndDigits(line)
         assertThat(result).isEqualTo(number)

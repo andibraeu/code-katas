@@ -4,9 +4,9 @@ import java.io.File
 
 class Calibrator {
     fun processList(lines: List<String>) =
-        lines.sumOf { extractTwoDigits(it, false) }
+        lines.sumOf { extractTwoDigits(it) }
 
-    internal fun extractTwoDigits(line: String, withStringNumbers: Boolean) =
+    internal fun extractTwoDigits(line: String) =
         findDigits(line).first() * 10 + findDigits(line).last()
 
     internal fun findDigits(line: String) =
@@ -14,8 +14,10 @@ class Calibrator {
             .filter { it.isDigit() }
             .map { it.digitToInt() }
 
-    fun extractTwoDigitsFromStringsAndDigits(line: String) =
-        extractTwoDigits(line, true)
+    internal fun extractTwoDigitsFromStringsAndDigits(line: String): Int {
+        val convertedLine = line.replace("one", "1")
+        return extractTwoDigits(convertedLine)
+    }
 }
 
 fun main() {
