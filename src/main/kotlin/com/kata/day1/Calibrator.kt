@@ -28,10 +28,14 @@ class Calibrator {
         )
         val firstDigitWord = line.findAnyOf(wordToDigitMap.keys)?.second
         val lastDigitWord = line.findLastAnyOf(wordToDigitMap.keys)?.second
-        val convertedLine = firstDigitWord?.let { line.replace(it, wordToDigitMap[firstDigitWord]!!) } ?: line
-        val finalLine = lastDigitWord?.let { convertedLine.replace(it, wordToDigitMap[lastDigitWord]!!) } ?: convertedLine
+        val finalLine = line.replaceWordByDigit(firstDigitWord, wordToDigitMap).replaceWordByDigit(lastDigitWord, wordToDigitMap)
         return extractTwoDigits(finalLine)
     }
+
+    private fun String.replaceWordByDigit(
+        digitWord: String?,
+        wordToDigitMap: Map<String, String>
+    ) = digitWord?.let { replace(it, wordToDigitMap[digitWord]!!) } ?: this
 }
 
 fun main() {
