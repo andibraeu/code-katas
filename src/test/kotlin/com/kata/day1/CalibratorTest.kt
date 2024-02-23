@@ -59,6 +59,7 @@ class CalibratorTest {
 
     private fun testDataPartTwo() = Stream.of(
         Arguments.of("1abc2", 12),
+        Arguments.of("oneight", 18),
         Arguments.of("two1nine", 29),
         Arguments.of("eightwothree", 83),
         Arguments.of("abcone2threexyz", 13),
