@@ -30,7 +30,9 @@ class Calibrator {
         val firstDigitWord = line.findAnyOf(wordToDigitMap.keys)?.second
         val lastDigitWord = line.findLastAnyOf(wordToDigitMap.keys)?.second
         val finalLine = line.replaceWordByDigit(firstDigitWord, wordToDigitMap).replaceWordByDigit(lastDigitWord, wordToDigitMap)
-        return extractTwoDigits(finalLine)
+        val extractTwoDigits = extractTwoDigits(finalLine)
+        println("$line : $extractTwoDigits")
+        return extractTwoDigits
     }
 
     private fun String.replaceWordByDigit(
@@ -40,8 +42,7 @@ class Calibrator {
 }
 
 fun main() {
-    val list = File("src/main/resources/andis_input.txt").bufferedReader().readLines()
+    val list = File("src/main/resources/initial_input.txt").bufferedReader().readLines()
 
-    //println(Calibrator().processList(list, false))
     println(Calibrator().processList(list, true))
 }
