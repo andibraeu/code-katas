@@ -13,9 +13,7 @@ class CalibratorTest {
 
     @Test
     fun `process list of lines and sum up digits`() {
-        val result = calibrator.processList(
-            listOf("1abc2", "pqr3stu8vwx", "a1b2c3d4e5f", "treb7uchet")
-        )
+        val result = calibrator.processList(listOf("1abc2", "pqr3stu8vwx", "a1b2c3d4e5f", "treb7uchet"), false)
         assertThat(result).isEqualTo(142)
     }
 
