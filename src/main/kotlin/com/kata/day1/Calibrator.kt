@@ -17,28 +17,25 @@ class Calibrator {
 
     internal fun extractTwoDigitsFromStringsAndDigits(line: String): Int {
         val wordToDigitMap = mapOf(
-            "one" to  "1",
-            "two" to  "2",
-            "three" to  "3",
-            "four" to  "4",
-            "five" to  "5",
-            "six" to  "6",
-            "seven" to  "7",
-            "eight" to  "8",
-            "nine" to  "9",
+            "one" to "1",
+            "two" to "2",
+            "three" to "3",
+            "four" to "4",
+            "five" to "5",
+            "six" to "6",
+            "seven" to "7",
+            "eight" to "8",
+            "nine" to "9",
         )
         val firstDigitWord = line.findAnyOf(wordToDigitMap.keys)?.second
+        val firstWordByDigit = line.replaceWordByDigit(firstDigitWord, wordToDigitMap)
+        val first = findDigits(firstWordByDigit).first()
+
         val lastDigitWord = line.findLastAnyOf(wordToDigitMap.keys)?.second
-        val replaceWordByDigit = line.replaceWordByDigit(firstDigitWord, wordToDigitMap)
+        val lastWordByDigit = line.replaceWordByDigit(lastDigitWord, wordToDigitMap)
+        val last = findDigits(lastWordByDigit).last()
 
-        val first = findDigits(replaceWordByDigit).first()
-
-        val finalLine = line.replaceWordByDigit(lastDigitWord, wordToDigitMap)
-        val last = findDigits(finalLine).last()
-
-        val result = first * 10 + last
-        println("$line : $result")
-        return result
+        return first * 10 + last
     }
 
     private fun String.replaceWordByDigit(
