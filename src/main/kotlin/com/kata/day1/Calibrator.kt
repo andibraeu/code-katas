@@ -3,8 +3,9 @@ package com.kata.day1
 import java.io.File
 
 class Calibrator {
-    fun processList(lines: List<String>) =
-        lines.sumOf { extractTwoDigits(it) }
+    fun processList(lines: List<String>, part2: Boolean) =
+        if (part2) lines.sumOf { extractTwoDigitsFromStringsAndDigits(it) }
+            else  lines.sumOf { extractTwoDigits(it) }
 
     internal fun extractTwoDigits(line: String) =
         findDigits(line).first() * 10 + findDigits(line).last()
@@ -39,7 +40,8 @@ class Calibrator {
 }
 
 fun main() {
-    val list = File("src/main/resources/input.txt").bufferedReader().readLines()
+    val list = File("src/main/resources/andis_input.txt").bufferedReader().readLines()
 
-    println(Calibrator().processList(list))
+    //println(Calibrator().processList(list, false))
+    println(Calibrator().processList(list, true))
 }
