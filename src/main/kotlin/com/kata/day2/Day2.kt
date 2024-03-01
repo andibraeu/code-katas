@@ -11,13 +11,14 @@ class Day2 {
         return line.split(":", limit = 2)
             .let {
                 val id = it[0].replace("Game ", "").toInt()
-                Game(id, it[1])
+                val grabs = it[1].split(";")
+                Game(id, grabs)
             }
     }
 
     data class Game (
         val id: Int,
-        val grabs: String
+        val grabs: List<String>
     )
 
 }
