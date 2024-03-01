@@ -7,6 +7,19 @@ class Day2 {
         return 8
     }
 
+    internal fun splitGameIdAndGrabs(line: String): Game {
+        return line.split(":", limit = 2)
+            .let {
+                val id = it[0].replace("Game ", "").toInt()
+                Game(id, it[1])
+            }
+    }
+
+    data class Game (
+        val id: Int,
+        val grabs: String
+    )
+
 }
 
 fun main() {
