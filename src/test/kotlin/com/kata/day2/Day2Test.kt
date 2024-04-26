@@ -1,11 +1,11 @@
 package com.kata.day2
 
+import com.kata.day2.Day2.Colors
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.Arguments
 import org.junit.jupiter.params.provider.MethodSource
-import org.junit.jupiter.params.provider.ValueSource
 import java.util.stream.Stream
 
 class Day2Test {
@@ -38,4 +38,14 @@ class Day2Test {
         Arguments.of("Game 5: 6 red, 1 blue, 3 green; 2 blue, 1 red, 2 green", listOf(" 6 red, 1 blue, 3 green", " 2 blue, 1 red, 2 green"), 5),
     )
 
+    @Test
+    fun getColorsAndNumbersTest() {
+        val result = Day2().getColorsAndNumbers(listOf(" 3 blue, 4 red", " 1 red, 2 green, 6 blue", " 2 green"))
+        assertThat(result).hasSize(3)
+        assertThat(result).containsExactly(
+            mapOf(Colors.BLUE to 3, Colors.RED to 4),
+            mapOf(Colors.BLUE to 6, Colors.RED to 1, Colors.GREEN to 2),
+            mapOf(Colors.GREEN to 2)
+        )
+    }
 }
