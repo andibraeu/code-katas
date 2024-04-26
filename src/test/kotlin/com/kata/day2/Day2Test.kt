@@ -1,6 +1,7 @@
 package com.kata.day2
 
 import com.kata.day2.Day2.Colors
+import com.kata.day2.Day2.Colors.*
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
@@ -43,9 +44,9 @@ class Day2Test {
         val result = Day2().getColorsAndNumbers(listOf(" 3 blue, 4 red", " 1 red, 2 green, 6 blue", " 2 green"))
         assertThat(result).hasSize(3)
         assertThat(result).containsExactly(
-            mapOf(Colors.BLUE to 3, Colors.RED to 4),
-            mapOf(Colors.BLUE to 6, Colors.RED to 1, Colors.GREEN to 2),
-            mapOf(Colors.GREEN to 2)
+            mapOf(BLUE to 3, RED to 4),
+            mapOf(BLUE to 6, RED to 1, GREEN to 2),
+            mapOf(GREEN to 2)
         )
     }
 }
