@@ -38,7 +38,17 @@ class Day2Test {
     }
 
     private fun grabsToValidate() = Stream.of(
-        Arguments.of( mapOf(BLUE to 4, GREEN to 7, RED to 7), true)
+        Arguments.of(mapOf(BLUE to 4, GREEN to 7, RED to 7), true),
+        Arguments.of(mapOf(BLUE to 14, GREEN to 13, RED to 12), true),
+        Arguments.of(mapOf(BLUE to 15, GREEN to 13, RED to 12), false),
+        Arguments.of(mapOf(BLUE to 14, GREEN to 14, RED to 12), false),
+        Arguments.of(mapOf(BLUE to 14, GREEN to 13, RED to 13), false),
+        Arguments.of(mapOf(BLUE to 50, GREEN to 23, RED to 20), false),
+        Arguments.of(mapOf(BLUE to 50, GREEN to 23, RED to 2), false),
+        Arguments.of(mapOf(BLUE to 12, GREEN to 8, RED to 0), true),
+        Arguments.of(mapOf(BLUE to 12, GREEN to 23), false),
+        Arguments.of(mapOf(BLUE to 12, GREEN to 5), true),
+        Arguments.of(mapOf(BLUE to 10), true)
     )
     private fun gameIdToExtract() = Stream.of(
         Arguments.of("Game 1: 3 blue, 4 red; 1 red, 2 green, 6 blue; 2 green", listOf(mapOf(RED to 4, BLUE to 3), mapOf(RED to 1, GREEN to 2, BLUE to 6), mapOf(GREEN to 2)), 1),
