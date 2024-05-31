@@ -30,12 +30,16 @@ class Day2Test {
         assertThat(game.grabs).isEqualTo(grabs)
     }
 
-    @Test
-    fun `test valid games`(){
-        val grab =mapOf(BLUE to 4, GREEN to 7, RED to 7)
+    @ParameterizedTest
+    @MethodSource("grabsToValidate")
+    fun `test valid games`(grab: Map<Day2.Colors, Int>, expectedResult: Boolean){
         val validationResult = Day2().isValidGrab(grab)
-        assertThat(validationResult).isTrue()
+        assertThat(validationResult).isEqualTo(expectedResult)
     }
+
+    private fun grabsToValidate() = Stream.of(
+        Arguments.of( mapOf(BLUE to 4, GREEN to 7, RED to 7), true)
+    )
     private fun gameIdToExtract() = Stream.of(
         Arguments.of("Game 1: 3 blue, 4 red; 1 red, 2 green, 6 blue; 2 green", listOf(mapOf(RED to 4, BLUE to 3), mapOf(RED to 1, GREEN to 2, BLUE to 6), mapOf(GREEN to 2)), 1),
         Arguments.of("Game 2: 1 blue, 2 green; 3 green, 4 blue, 1 red; 1 green, 1 blue", listOf(mapOf(BLUE to 1 , GREEN to 2), mapOf(RED to 1, GREEN to 3, BLUE to 4), mapOf(GREEN to 1, BLUE to 1)), 2),
