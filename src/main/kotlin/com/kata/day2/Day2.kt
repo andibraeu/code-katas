@@ -38,13 +38,16 @@ class Day2 {
         }
     }
 
+    fun isValidGrab(grab: Map<Colors, Int>): Boolean =
+        Colors.entries.none { (grab[it] ?: 0) > it.maxSize }
+
     data class Game (
         val id: Int,
         val grabs: List<Map<Colors, Int>>
     )
 
-    enum class Colors {
-        RED, BLUE, GREEN
+    enum class Colors(val maxSize: Int) {
+        RED(12), GREEN(13), BLUE(14)
     }
 
 }
