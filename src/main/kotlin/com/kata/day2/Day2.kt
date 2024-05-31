@@ -7,7 +7,15 @@ import java.io.File
 
 class Day2 {
     fun processInput(inputLines: List<String>, part2: Boolean): Int {
-        return 8
+        val games = inputLines.map { splitGameIdAndGrabs(it) }
+        return games
+            .map { game ->
+            val isValid = game.grabs
+                .none { !isValidGrab(it) }
+            game.id to isValid
+        }
+            .filter { it.second }
+            .sumOf { it.first }
     }
 
     internal fun splitGameIdAndGrabs(line: String): Game {
