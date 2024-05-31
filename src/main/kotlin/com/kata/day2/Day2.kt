@@ -6,17 +6,11 @@ import com.kata.day2.Day2.Colors.RED
 import java.io.File
 
 class Day2 {
-    fun processInput(inputLines: List<String>, part2: Boolean): Int {
-        val games = inputLines.map { splitGameIdAndGrabs(it) }
-        return games
-            .map { game ->
-            val isValid = game.grabs
-                .none { !isValidGrab(it) }
-            game.id to isValid
-        }
-            .filter { it.second }
-            .sumOf { it.first }
-    }
+    fun processInput(inputLines: List<String>, part2: Boolean): Int = inputLines
+        .map { splitGameIdAndGrabs(it) }
+        .map { it.id to it.grabs.all { map -> isValidGrab(map) } }
+        .filter { it.second }
+        .sumOf { it.first }
 
     internal fun splitGameIdAndGrabs(line: String): Game {
         return line.split(":", limit = 2)
