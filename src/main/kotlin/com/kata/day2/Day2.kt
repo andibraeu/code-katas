@@ -6,11 +6,15 @@ import com.kata.day2.Day2.Colors.RED
 import java.io.File
 
 class Day2 {
-    fun processInput(inputLines: List<String>, part2: Boolean): Int = inputLines
-        .map { splitGameIdAndGrabs(it) }
-        .map { it.id to it.grabs.all { map -> isValidGrab(map) } }
-        .filter { it.second }
-        .sumOf { it.first }
+    fun processInput(inputLines: List<String>, part2: Boolean = false): Int {
+        return if (! part2) inputLines
+            .map { splitGameIdAndGrabs(it) }
+            .map { it.id to it.grabs.all { map -> isValidGrab(map) } }
+            .filter { it.second }
+            .sumOf { it.first }
+        else 123
+
+    }
 
     internal fun splitGameIdAndGrabs(line: String): Game {
         return line.split(":", limit = 2)
@@ -29,6 +33,19 @@ class Day2 {
                     mapColor(split[1]) to split[0].toInt()
                 }
         }
+    }
+
+    internal fun getFewestNumberOfCubes(game: Game): Map<Colors,Int> {
+        val result = mutableMapOf<Colors,Int>()
+        game.grabs
+            .map {
+                it.forEach { (colors, i) ->
+                    if (result[colors] == null || result[colors]!! <= i) {
+                        result[colors] = i
+                    }
+                }
+            }
+        return result
     }
 
     private fun mapColor(colorString: String): Colors {
@@ -51,7 +68,6 @@ class Day2 {
     enum class Colors(val maxSize: Int) {
         RED(12), GREEN(13), BLUE(14)
     }
-
 }
 
 fun main() {

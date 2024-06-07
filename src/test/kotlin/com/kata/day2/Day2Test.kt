@@ -68,4 +68,11 @@ class Day2Test {
             mapOf(GREEN to 2)
         )
     }
+
+    @Test
+    fun getFewestNumbersTest() {
+        val result = Day2().getFewestNumberOfCubes(Day2.Game(1, listOf(mapOf(GREEN to 8, BLUE to 6, RED to 20), mapOf(BLUE to 5, GREEN to 13, RED to 4), mapOf(GREEN to 5, RED to 1))))
+
+        assertThat(result).isEqualTo(mapOf(RED to 20, GREEN to 13, BLUE to 6))
+    }
 }
