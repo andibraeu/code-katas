@@ -11,8 +11,8 @@ class Day3Test {
 
         assertThat(result)
             .containsExactly(
-                "467",
-                "114"
+                NumberWithPosition(467, 0..2),
+                NumberWithPosition(114, 5..7),
             )
     }
 

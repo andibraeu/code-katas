@@ -8,17 +8,17 @@ class Day3 {
         return 5
     }
 
-    fun extractNumbersWithPosition(line: String): List<String> {
+    fun extractNumbersWithPosition(line: String): List<NumberWithPosition> {
         val regex = Regex("\\d+")
         val findAll = regex.findAll(line, 0)
-        return findAll.map { it.value }.toList()
+        return findAll.map { NumberWithPosition(it.value.toInt(), it.groups.get(0)?.range) }.toList() //TODO replace 0
     }
 
 }
 
 data class NumberWithPosition(
     val value: Int,
-    val position: Int
+    val position: IntRange?
 )
 
 fun main() {
