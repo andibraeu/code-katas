@@ -12,7 +12,12 @@ class Day2 {
             .map { it.id to it.grabs.all { map -> isValidGrab(map) } }
             .filter { it.second }
             .sumOf { it.first }
-        else 123
+        else {
+            inputLines
+                .map { splitGameIdAndGrabs(it) }
+                .map { getFewestNumberOfCubes(it) }
+                .sumOf { multiplyNumberOfColors(it) }
+        }
 
     }
 
@@ -60,6 +65,9 @@ class Day2 {
     fun isValidGrab(grab: Map<Colors, Int>): Boolean =
         Colors.entries.none { (grab[it] ?: 0) > it.maxSize }
 
+    fun multiplyNumberOfColors(cubesMap: Map<Colors, Int>): Int =
+        cubesMap.entries.map{it.value}.reduce { acc, entry -> acc * entry }
+
     data class Game (
         val id: Int,
         val grabs: List<Map<Colors, Int>>
@@ -73,5 +81,5 @@ class Day2 {
 fun main() {
     val list = File("src/main/resources/day2/test_input.txt").bufferedReader().readLines()
 
-    println(Day2().processInput(list, false))
+    println(Day2().processInput(list, true))
 }

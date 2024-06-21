@@ -75,4 +75,10 @@ class Day2Test {
 
         assertThat(result).isEqualTo(mapOf(RED to 20, GREEN to 13, BLUE to 6))
     }
+
+    @Test
+    fun getProduct() {
+        val result = Day2().multiplyNumberOfColors(mapOf(RED to 20, GREEN to 13, BLUE to 6))
+        assertThat(result).isEqualTo(1560)
+    }
 }
