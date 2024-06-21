@@ -8,7 +8,18 @@ class Day3 {
         return 5
     }
 
+    fun extractNumbersWithPosition(line: String): List<String> {
+        val regex = Regex("\\d+")
+        val findAll = regex.findAll(line, 0)
+        return findAll.map { it.value }.toList()
+    }
+
 }
+
+data class NumberWithPosition(
+    val value: Int,
+    val position: Int
+)
 
 fun main() {
     val list = File("src/main/resources/day3/test_input.txt").bufferedReader().readLines()
