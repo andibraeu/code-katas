@@ -11,7 +11,7 @@ class Day3 {
     fun extractNumbersWithPosition(line: String): List<NumberWithPosition> {
         val regex = Regex("\\d+")
         val findAll = regex.findAll(line, 0)
-        return findAll.map { NumberWithPosition(it.value.toInt(), it.groups.get(0)?.range) }.toList() //TODO replace 0
+        return findAll.map { NumberWithPosition(it.value.toInt(), it.groups[0]?.range) }.toList()
     }
 
 }
