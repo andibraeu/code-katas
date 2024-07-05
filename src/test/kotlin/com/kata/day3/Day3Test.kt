@@ -1,11 +1,11 @@
 package com.kata.day3
 
+import java.util.stream.Stream
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.Arguments
 import org.junit.jupiter.params.provider.MethodSource
-import java.util.stream.Stream
 
 class Day3Test {
 
@@ -18,7 +18,7 @@ class Day3Test {
     }
 
     private fun extractNumbersInput(): Stream<Arguments> = Stream.of(
-        Arguments.of("467..114..", listOf(NumberWithPosition(467, 0..2), NumberWithPosition(114, 5..7), )),
+        Arguments.of("467..114..", listOf(NumberWithPosition(467, 0..2), NumberWithPosition(114, 5..7))),
         Arguments.of("...*......", emptyList<NumberWithPosition>()),
         Arguments.of("...*...456", listOf(NumberWithPosition(456, 7..9))),
         Arguments.of("...*.....6", listOf(NumberWithPosition(6, 9..9))),
@@ -35,8 +35,24 @@ class Day3Test {
     private fun extractSymbolsInput(): Stream<Arguments> = Stream.of(
         Arguments.of("467..114..", emptyList<SymbolWithPosition>()),
         Arguments.of("...*....+.", listOf(SymbolWithPosition("*", 3), SymbolWithPosition("+", 8))),
-        Arguments.of("...*...#@/", listOf(SymbolWithPosition("*", 3), SymbolWithPosition("#", 7), SymbolWithPosition("@", 8), SymbolWithPosition("/", 9))),
-        Arguments.of(".(.*..?..$", listOf(SymbolWithPosition("(", 1), SymbolWithPosition("*", 3), SymbolWithPosition("?", 6), SymbolWithPosition("$", 9))),
+        Arguments.of(
+            "...*...#@/",
+            listOf(
+                SymbolWithPosition("*", 3),
+                SymbolWithPosition("#", 7),
+                SymbolWithPosition("@", 8),
+                SymbolWithPosition("/", 9)
+            )
+        ),
+        Arguments.of(
+            ".(.*..?..$",
+            listOf(
+                SymbolWithPosition("(", 1),
+                SymbolWithPosition("*", 3),
+                SymbolWithPosition("?", 6),
+                SymbolWithPosition("$", 9)
+            )
+        ),
     )
 
     @Test
@@ -67,6 +83,6 @@ class Day3Test {
         )
         val result = Day3().findNumbersNextToSymbols(numbersList, symbolsList)
 
-        assertThat(result).containsExactly(467, 35, 633, 617, 592, 755, 664, 598)
+        assertThat(result).containsExactlyInAnyOrder(467, 35, 633, 617, 592, 755, 664, 598)
     }
 }

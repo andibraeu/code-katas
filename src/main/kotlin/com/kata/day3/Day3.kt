@@ -19,16 +19,46 @@ class Day3 {
         numbersList: List<List<NumberWithPosition>>,
         symbolsList: List<List<SymbolWithPosition>>
     ): List<Int> {
-        numbersList.forEachIndexed { lineNumber, numberWithPositions ->
+
+        val sameLine = numbersList.mapIndexed { lineNumber, numberWithPositions ->
             numberWithPositions
-                .filter {
-                    val symbolsInCurrentLine = symbolsList[lineNumber]
-                    val realPosition = it.position.first - 1 .. it.position.last + 1
-                    symbolsInCurrentLine[0].position in it.position
+                .filter { filterLine(symbolsList, lineNumber, it) }
+                .map { it.value }
+        }.flatten()
+
+        val upperLine = numbersList.mapIndexed { lineNumber, numberWithPositions ->
+            numberWithPositions
+                .filter { filterLine(symbolsList, lineNumber - 1, it) }
+                .map { it.value }
+        }.flatten()
+
+        val lowerLine = numbersList.mapIndexed { lineNumber, numberWithPositions ->
+            numberWithPositions
+                .filter { filterLine(symbolsList, lineNumber + 1, it) }
+                .map { it.value }
+        }.flatten()
+
+        return sameLine + upperLine + lowerLine
+    }
+
+    private fun filterLine(
+        symbolsList: List<List<SymbolWithPosition>>,
+        lineNumber: Int,
+        numberWithPosition: NumberWithPosition
+    ): Boolean {
+        try {
+            val symbolsInCurrentLine = symbolsList[lineNumber]
+            return if (symbolsInCurrentLine.isEmpty())
+                false
+            else {
+                symbolsInCurrentLine.any { symbolInCurrentLine ->
+                    val realPosition = numberWithPosition.position.first - 1..numberWithPosition.position.last + 1
+                    symbolInCurrentLine.position in realPosition
                 }
-            // TODO: Zahlen merken und benachbarte Zeilen berücksichtigen
+            }
+        } catch (e: Exception) {
+            return false
         }
-        return emptyList()
     }
 
     fun extractNumbersWithPosition(line: String): List<NumberWithPosition> {
