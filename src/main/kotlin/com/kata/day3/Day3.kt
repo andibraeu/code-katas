@@ -11,8 +11,7 @@ class Day3 {
         val symbolsList = inputLines.map {
             extractSymbolsWithPosition(it)
         }
-        val result = findNumbersNextToSymbols(numbersList, symbolsList)
-        return 5
+        return findNumbersNextToSymbols(numbersList, symbolsList).sum()
     }
 
     internal fun findNumbersNextToSymbols(
