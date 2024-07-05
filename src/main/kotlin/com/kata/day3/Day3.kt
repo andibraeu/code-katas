@@ -63,7 +63,15 @@ class Day3 {
     }
 
     fun extractSymbolsWithPosition(line: String): List<SymbolWithPosition> {
-        val regex = Regex("[^.0-9]")
+        return symbolWithPositions(line, "[^.0-9]")
+    }
+
+    fun extractStar(line: String): List<SymbolWithPosition> {
+        return symbolWithPositions(line, "\\*")
+    }
+
+    private fun symbolWithPositions(line: String, pattern: String): List<SymbolWithPosition> {
+        val regex = Regex(pattern)
         val findAll = regex.findAll(line, 0)
         return findAll.map { SymbolWithPosition(it.value, it.groups[0]?.range!!.first) }.toList()
     }

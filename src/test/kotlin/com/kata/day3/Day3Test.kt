@@ -32,6 +32,15 @@ class Day3Test {
         assertThat(result).isEqualTo(expectedResult)
     }
 
+    @ParameterizedTest
+    @MethodSource("extractStar")
+    fun `test line with star`(input: String, expectedResult: List<SymbolWithPosition>) {
+        val result = Day3().extractStar(input)
+
+        assertThat(result).isEqualTo(expectedResult)
+    }
+
+
     private fun extractSymbolsInput(): Stream<Arguments> = Stream.of(
         Arguments.of("467..114..", emptyList<SymbolWithPosition>()),
         Arguments.of("...*....+.", listOf(SymbolWithPosition("*", 3), SymbolWithPosition("+", 8))),
@@ -53,6 +62,13 @@ class Day3Test {
                 SymbolWithPosition("$", 9)
             )
         ),
+    )
+
+    private fun extractStar(): Stream<Arguments> = Stream.of(
+        Arguments.of("467..114..", emptyList<SymbolWithPosition>()),
+        Arguments.of("...*....+.", listOf(SymbolWithPosition("*", 3))),
+        Arguments.of("...*...#@/", listOf(SymbolWithPosition("*", 3))),
+        Arguments.of(".(.*..?..$", listOf(SymbolWithPosition("*", 3))),
     )
 
     @Test
