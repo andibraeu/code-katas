@@ -20,26 +20,22 @@ class Day3 {
         symbolsList: List<List<SymbolWithPosition>>
     ): List<Int> {
 
-        val sameLine = numbersList.mapIndexed { lineNumber, numberWithPositions ->
-            numberWithPositions
-                .filter { filterLine(symbolsList, lineNumber, it) }
-                .map { it.value }
-        }.flatten()
-
-        val upperLine = numbersList.mapIndexed { lineNumber, numberWithPositions ->
-            numberWithPositions
-                .filter { filterLine(symbolsList, lineNumber - 1, it) }
-                .map { it.value }
-        }.flatten()
-
-        val lowerLine = numbersList.mapIndexed { lineNumber, numberWithPositions ->
-            numberWithPositions
-                .filter { filterLine(symbolsList, lineNumber + 1, it) }
-                .map { it.value }
-        }.flatten()
+        val sameLine = calculateLine(numbersList, symbolsList, 0)
+        val upperLine = calculateLine(numbersList, symbolsList, -1)
+        val lowerLine = calculateLine(numbersList, symbolsList, 1)
 
         return sameLine + upperLine + lowerLine
     }
+
+    private fun calculateLine(
+        numbersList: List<List<NumberWithPosition>>,
+        symbolsList: List<List<SymbolWithPosition>>,
+        lineShift: Int
+    ) = numbersList.mapIndexed { lineNumber, numberWithPositions ->
+        numberWithPositions
+            .filter { filterLine(symbolsList, lineNumber + lineShift, it) }
+            .map { it.value }
+    }.flatten()
 
     private fun filterLine(
         symbolsList: List<List<SymbolWithPosition>>,
