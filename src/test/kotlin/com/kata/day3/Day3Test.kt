@@ -66,7 +66,7 @@ class Day3Test {
 
     private fun extractStar(): Stream<Arguments> = Stream.of(
         Arguments.of("467..114..", emptyList<SymbolWithPosition>()),
-        Arguments.of("...*....+.", listOf(SymbolWithPosition("*", 3))),
+        Arguments.of("..*.....+.", listOf(SymbolWithPosition("*", 2))),
         Arguments.of("...*...#@/", listOf(SymbolWithPosition("*", 3))),
         Arguments.of(".(.*..?..$", listOf(SymbolWithPosition("*", 3))),
     )

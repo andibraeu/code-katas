@@ -5,6 +5,10 @@ import java.io.File
 class Day3 {
 
     fun processInput(inputLines: List<String>, part2: Boolean = false): Int {
+        return calculatePart1(inputLines)
+    }
+
+    private fun calculatePart1(inputLines: List<String>): Int {
         val numbersList = inputLines.map {
             extractNumbersWithPosition(it)
         }
