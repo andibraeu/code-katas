@@ -5,7 +5,17 @@ import java.io.File
 class Day3 {
 
     fun processInput(inputLines: List<String>, part2: Boolean = false): Int {
-        return calculatePart1(inputLines)
+        return if (part2) calculatePart2(inputLines) else calculatePart1(inputLines)
+    }
+
+    private fun calculatePart2(inputLines: List<String>): Int {
+        val numbersList = inputLines.map {
+            extractNumbersWithPosition(it)
+        }
+        val symbolsList = inputLines.map {
+            extractSymbolsWithPosition(it)
+        }
+        return findNumbersNextToSymbols(numbersList, symbolsList).sum()
     }
 
     private fun calculatePart1(inputLines: List<String>): Int {
