@@ -73,18 +73,7 @@ class Day3Test {
 
     @Test
     fun `find numbers next to symbols`() {
-        val numbersList = listOf(
-            listOf(NumberWithPosition(467, 0..2), NumberWithPosition(114, 5..7)),
-            emptyList(),
-            listOf(NumberWithPosition(35, 2..3), NumberWithPosition(633, 6..8)),
-            emptyList(),
-            listOf(NumberWithPosition(617, 0..2)),
-            listOf(NumberWithPosition(58, 7..8)),
-            listOf(NumberWithPosition(592, 2..4)),
-            listOf(NumberWithPosition(755, 6..8)),
-            emptyList(),
-            listOf(NumberWithPosition(664, 1..3), NumberWithPosition(598, 5..7))
-        )
+
         val symbolsList = listOf(
             emptyList(),
             listOf(SymbolWithPosition("*", 3)),
@@ -97,8 +86,43 @@ class Day3Test {
             listOf(SymbolWithPosition("$", 3), SymbolWithPosition("*", 5)),
             emptyList()
         )
-        val result = Day3().findNumbersNextToSymbols(numbersList, symbolsList)
+        val result = Day3().findNumbersNextToSymbols(NUMBERS_LIST, symbolsList)
 
         assertThat(result).containsExactlyInAnyOrder(467, 35, 633, 617, 592, 755, 664, 598)
+    }
+
+    @Test
+    fun `find pairs next to stars`() {
+
+        val symbolsList = listOf(
+            emptyList(),
+            listOf(SymbolWithPosition("*", 3)),
+            emptyList(),
+            emptyList(),
+            listOf(SymbolWithPosition("*", 3)),
+            emptyList(),
+            emptyList(),
+            emptyList(),
+            listOf(SymbolWithPosition("*", 5)),
+            emptyList()
+        )
+        val result = Day3().findPairsNextToStars(symbolsList, NUMBERS_LIST)
+
+        assertThat(result).containsExactlyInAnyOrder(467 to 35, 755 to 598)
+    }
+
+    companion object {
+        val NUMBERS_LIST = listOf(
+            listOf(NumberWithPosition(467, 0..2), NumberWithPosition(114, 5..7)),
+            emptyList(),
+            listOf(NumberWithPosition(35, 2..3), NumberWithPosition(633, 6..8)),
+            emptyList(),
+            listOf(NumberWithPosition(617, 0..2)),
+            listOf(NumberWithPosition(58, 7..8)),
+            listOf(NumberWithPosition(592, 2..4)),
+            listOf(NumberWithPosition(755, 6..8)),
+            emptyList(),
+            listOf(NumberWithPosition(664, 1..3), NumberWithPosition(598, 5..7))
+        )
     }
 }

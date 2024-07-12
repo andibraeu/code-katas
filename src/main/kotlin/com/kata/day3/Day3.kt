@@ -9,13 +9,11 @@ class Day3 {
     }
 
     private fun calculatePart2(inputLines: List<String>): Int {
-        val numbersList = inputLines.map {
-            extractNumbersWithPosition(it)
-        }
-        val symbolsList = inputLines.map {
-            extractSymbolsWithPosition(it)
-        }
-        return findNumbersNextToSymbols(numbersList, symbolsList).sum()
+        val starList = inputLines.map { extractStar(it) }
+
+        val numbersList = inputLines.map { extractNumbersWithPosition(it) }
+
+        return findPairsNextToStars(starList, numbersList).sumOf { it.first * it.second }
     }
 
     private fun calculatePart1(inputLines: List<String>): Int {
@@ -40,17 +38,39 @@ class Day3 {
         return sameLine + upperLine + lowerLine
     }
 
+    internal fun findPairsNextToStars(
+        starList: List<List<SymbolWithPosition>>,
+        numbersList: List<List<NumberWithPosition>>,
+    ): List<Pair<Int, Int>> {
+
+        return starList.mapIndexedNotNull { index, line ->
+
+            if (line.isEmpty())
+                null
+            else {
+                line.map {
+                    val currentLine = filterLineByStarSymbol(it, numbersList[index])
+                    val belowLine = filterLineByStarSymbol(it, numbersList[index + 1])
+                    val aboveLine = filterLineByStarSymbol(it, numbersList[index - 1])
+
+                    currentLine + aboveLine + belowLine
+                }.filter { it.size == 2 }
+                    .map { it[0] to it[1] }
+            }
+        }.flatten()
+    }
+
     private fun calculateLine(
         numbersList: List<List<NumberWithPosition>>,
         symbolsList: List<List<SymbolWithPosition>>,
         lineShift: Int
     ) = numbersList.mapIndexed { lineNumber, numberWithPositions ->
         numberWithPositions
-            .filter { filterLine(symbolsList, lineNumber + lineShift, it) }
+            .filter { filterLineByNumberWithPosition(symbolsList, lineNumber + lineShift, it) }
             .map { it.value }
     }.flatten()
 
-    private fun filterLine(
+    private fun filterLineByNumberWithPosition(
         symbolsList: List<List<SymbolWithPosition>>,
         lineNumber: Int,
         numberWithPosition: NumberWithPosition
@@ -69,6 +89,17 @@ class Day3 {
             return false
         }
     }
+
+    private fun filterLineByStarSymbol(
+        symbol: SymbolWithPosition,
+        numberWithPositionList: List<NumberWithPosition>
+    ): List<Int> =
+        numberWithPositionList.mapNotNull { number ->
+            val realPosition = number.position.first - 1..number.position.last + 1
+            if (symbol.position in realPosition)
+                number.value
+            else null
+        }
 
     fun extractNumbersWithPosition(line: String): List<NumberWithPosition> {
         val regex = Regex("\\d+")
@@ -103,8 +134,8 @@ data class NumberWithPosition(
 )
 
 fun main() {
-    val list = File("src/main/resources/day3/test_input.txt").bufferedReader().readLines()
+    val list = File("src/main/resources/day3/andis_input.txt").bufferedReader().readLines()
 
-    println(Day3().processInput(list, false))
+    println(Day3().processInput(list, true))
 }
 
