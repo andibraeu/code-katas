@@ -1,12 +1,25 @@
 package com.kata.day4
 
 import java.io.File
+import kotlin.math.pow
 
 class Day4 {
 
     fun processInput(inputLines: List<String>, part2: Boolean = false): Int {
-        return 0
+        val pairs = inputLines.map {
+            convertLineToLists(it)
+        }
+            .map {
+                countWinningNumbers(it)
+            }
+            .filter { it > 0 }.sumOf { 2.toDouble().pow(it - 1).toInt() }
+        return pairs
     }
+
+    fun countWinningNumbers(pair: Pair<List<Int>, List<Int>>) = pair.second
+        .filter {
+            pair.first.contains(it) }
+        .size
 
     fun convertLineToLists(line: String): Pair<List<Int>, List<Int>> {
         val splittedString = line.split(":").last()
@@ -16,7 +29,7 @@ class Day4 {
 
         return Pair(winningNumbers, numbersPool)
     }
-c
+
     private fun String.toIntList() =  trim()
         .split(" ")
         .filter { it.isNotBlank() }
@@ -24,7 +37,7 @@ c
 }
 
 fun main() {
-    val list = File("src/main/resources/day4/test_input.txt").bufferedReader().readLines()
+    val list = File("src/main/resources/day4/andis_input.txt").bufferedReader().readLines()
 
     println(Day4().processInput(list, false))
 }
