@@ -18,7 +18,8 @@ class Day4 {
 
     fun countWinningNumbers(pair: Pair<List<Int>, List<Int>>) = pair.second
         .filter {
-            pair.first.contains(it) }
+            pair.first.contains(it)
+        }
         .size
 
     fun convertLineToLists(line: String): Pair<List<Int>, List<Int>> {
@@ -30,14 +31,14 @@ class Day4 {
         return Pair(winningNumbers, numbersPool)
     }
 
-    private fun String.toIntList() =  trim()
+    private fun String.toIntList() = trim()
         .split(" ")
         .filter { it.isNotBlank() }
         .map { it.toInt() }
 }
 
 fun main() {
-    val list = File("src/main/resources/day4/andis_input.txt").bufferedReader().readLines()
+    val list = File("src/main/resources/day4/test_input.txt").bufferedReader().readLines()
 
     println(Day4().processInput(list, false))
 }
