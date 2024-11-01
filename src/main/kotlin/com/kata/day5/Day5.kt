@@ -22,7 +22,7 @@ class Day5 {
         val result = mutableMapOf<String, MutableList<String>>()
         var key = ""
 
-        mapsOnly.forEach { line->
+        mapsOnly.forEach { line ->
             if (line.endsWith("map:")) {
                 key = line.split(" ")[0]
                 result[key] = mutableListOf<String>()
@@ -32,7 +32,19 @@ class Day5 {
         }
         return result
     }
+
+    fun convertToMapEntry(entry: String): MapEntry {
+        val split = entry.split(" ").map { it.toInt() }
+
+        val endRange = split[1] + split[2] - 1
+        return MapEntry(split[1]..endRange, split[0] - split[1])
+    }
 }
+
+data class MapEntry(
+    val range: IntRange,
+    val diff: Int
+)
 
 fun main() {
     val list = File("src/main/resources/day4/test_input.txt").bufferedReader().readLines()

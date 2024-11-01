@@ -6,15 +6,15 @@ import kotlin.math.pow
 class Day4 {
 
     fun processInput(inputLines: List<String>, part2: Boolean = false): Int {
-        val winningNumbers: List<Int> = inputLines.map { convertLineToLists(it) }
+        val winningNumbers: List<Int> = inputLines
+            .map { convertLineToLists(it) }
             .map { countWinningNumbers(it) }
 
         return if (part2) {
             val resultList = (1..winningNumbers.size).map { 1 }.toMutableList()
             winningNumbers.forEachIndexed { index, winningNumber ->
-                (index + 1..index + winningNumber).forEach {
-                    resultList[it] += resultList[index]
-                }
+                (index + 1..index + winningNumber)
+                    .forEach { resultList[it] += resultList[index] }
             }
             return resultList.sum()
         } else
