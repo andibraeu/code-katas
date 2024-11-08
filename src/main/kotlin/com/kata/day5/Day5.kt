@@ -39,11 +39,19 @@ class Day5 {
         val endRange = split[1] + split[2] - 1
         return MapEntry(split[1]..endRange, split[0] - split[1])
     }
+
+    fun getSoilFromSeed(input: Int, seedToSoilMapEntries: List<MapEntry>): Int {
+        return seedToSoilMapEntries.firstOrNull {
+            input in it.range
+        }?.let {
+            input + it.offset
+        }?: input
+    }
 }
 
 data class MapEntry(
     val range: IntRange,
-    val diff: Int
+    val offset: Int
 )
 
 fun main() {
