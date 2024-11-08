@@ -16,18 +16,18 @@ class Day5 {
             .map { it.toInt() }
     }
 
-    fun readMaps(input: List<String>): Map<String, List<String>> {
+    fun readMaps(input: List<String>): Map<String, List<MapEntry>> {
         val mapsOnly = input
             .filter { !it.startsWith("seeds:") }
-        val result = mutableMapOf<String, MutableList<String>>()
+        val result = mutableMapOf<String, MutableList<MapEntry>>()
         var key = ""
 
         mapsOnly.forEach { line ->
             if (line.endsWith("map:")) {
                 key = line.split(" ")[0]
-                result[key] = mutableListOf<String>()
+                result[key] = mutableListOf()
             } else {
-                if (line != "") result[key]?.add(line)
+                if (line != "") result[key]?.add(convertToMapEntry(line))
             }
         }
         return result

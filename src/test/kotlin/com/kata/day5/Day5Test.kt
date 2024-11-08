@@ -27,8 +27,8 @@ class Day5Test {
             )
         )
         val expected = mapOf(
-            "seed-to-soil" to listOf("50 98 2", "52 50 48"),
-            "soil-to-fertilizer" to listOf("0 15 37", "37 52 2", "39 0 15")
+            "seed-to-soil" to listOf(MapEntry(98..99, -48), MapEntry(50..97, 2)),
+            "soil-to-fertilizer" to listOf(MapEntry(15..51, -15), MapEntry(52..53, -15), MapEntry(0..14, 39))
         )
         assertThat(maps).isEqualTo(expected)
     }
