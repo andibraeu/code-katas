@@ -16,18 +16,18 @@ class Day5 {
             .map { it.toInt() }
     }
 
-    fun readMaps(input: List<String>): Map<String, List<MapEntry>> {
+    fun readMaps(input: List<String>): List<List<MapEntry>> {
         val mapsOnly = input
             .filter { !it.startsWith("seeds:") }
-        val result = mutableMapOf<String, MutableList<MapEntry>>()
+        val result = mutableListOf<MutableList<MapEntry>>()
         var key = ""
 
         mapsOnly.forEach { line ->
             if (line.endsWith("map:")) {
                 key = line.split(" ")[0]
-                result[key] = mutableListOf()
+                result.add(mutableListOf())
             } else {
-                if (line != "") result[key]?.add(convertToMapEntry(line))
+                if (line != "") result.last().add(convertToMapEntry(line))
             }
         }
         return result
@@ -46,6 +46,14 @@ class Day5 {
         }?.let {
             input + it.offset
         }?: input
+    }
+
+    fun walkThroughMaps(seed: Int, input: List<List<MapEntry>>): Int {
+        var result = seed
+        input.forEach {
+            result = getSoilFromSeed(result, it)
+        }
+        return result
     }
 }
 

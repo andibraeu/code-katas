@@ -32,9 +32,9 @@ class Day5Test {
                 "39 0 15"
             )
         )
-        val expected = mapOf(
-            "seed-to-soil" to listOf(MapEntry(98..99, -48), MapEntry(50..97, 2)),
-            "soil-to-fertilizer" to listOf(MapEntry(15..51, -15), MapEntry(52..53, -15), MapEntry(0..14, 39))
+        val expected = listOf(
+            listOf(MapEntry(98..99, -48), MapEntry(50..97, 2)),
+            listOf(MapEntry(15..51, -15), MapEntry(52..53, -15), MapEntry(0..14, 39))
         )
         assertThat(maps).isEqualTo(expected)
     }
@@ -53,6 +53,25 @@ class Day5Test {
         Arguments.of(15, 15),
         Arguments.of(100, 100),
     )
+
+    @ParameterizedTest
+    @MethodSource("seedToFertilizerAssignment")
+    fun resolveFertilizer(seed: Int, expected: Int) {
+        val input = listOf(
+            listOf(MapEntry(98..99, -48), MapEntry(50..97, 2)),
+            listOf(MapEntry(15..51, -15), MapEntry(52..53, -15), MapEntry(0..14, 39))
+        )
+        val result = Day5().walkThroughMaps(seed, input)
+        assertThat(result).isEqualTo(expected)
+    }
+
+    private fun seedToFertilizerAssignment(): Stream<Arguments> = Stream.of(
+        Arguments.of(79, 81),
+        Arguments.of(14, 53),
+        Arguments.of(55, 57),
+        Arguments.of(13, 52),
+    )
+
 
     @Test
     fun convertToMapEntry() {
