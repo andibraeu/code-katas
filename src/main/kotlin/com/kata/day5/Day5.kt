@@ -6,11 +6,22 @@ class Day5 {
 
     fun processInput(inputLines: List<String>, part2: Boolean = false): Long {
         return readMaps(inputLines)
-            .let { maps -> readSeeds(inputLines).minOfOrNull { walkThroughMaps(it, maps) } }
+            .let { maps ->
+
+                if (part2) {
+                    val listOfMins = mutableListOf<Long>()
+                    readSeedRanges(inputLines).forEach { seedRange ->
+                        val minOfOrNull = seedRange.minOfOrNull { walkThroughMaps(it, maps) } ?: 0
+                        listOfMins.add(minOfOrNull)
+                    }
+
+                    listOfMins.min()
+                } else readSeeds(inputLines).minOfOrNull { walkThroughMaps(it, maps) }
+            }
             ?: 0
     }
 
-    fun readSeedRanges(input: List<String>): List<Long> {
+    fun readSeedRanges(input: List<String>): List<LongRange> {
         val readSeeds = readSeeds(input)
 
         val listOfRanges = mutableListOf<LongRange>()
@@ -19,7 +30,7 @@ class Day5 {
             listOfRanges.add(longRange)
         }
 
-        return listOfRanges.flatMap { it.toList() }
+        return listOfRanges
     }
 
     fun readSeeds(input: List<String>): List<Long> {
@@ -76,7 +87,7 @@ data class MapEntry(
 )
 
 fun main() {
-    val list = File("src/main/resources/day5/test_input.txt").bufferedReader().readLines()
+    val list = File("src/main/resources/day5/andis_input.txt").bufferedReader().readLines()
 
     println(Day5().processInput(list, true))
 }
