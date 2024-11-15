@@ -16,6 +16,15 @@ class Day5Test {
     }
 
     @Test
+    fun readSeedsRanges() {
+        val seeds = Day5().readSeedRanges(listOf("seeds: 79 14 55 13", "", "seed-to-soil map:", "50 12 32"))
+        assertThat(seeds).containsExactly(
+            79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92,
+            55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67
+        )
+    }
+
+    @Test
     fun readMaps() {
         val maps = Day5().readMaps(
             listOf(

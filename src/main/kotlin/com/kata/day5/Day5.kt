@@ -10,6 +10,18 @@ class Day5 {
             ?: 0
     }
 
+    fun readSeedRanges(input: List<String>): List<Long> {
+        val readSeeds = readSeeds(input)
+
+        val listOfRanges = mutableListOf<LongRange>()
+        for (i in readSeeds.indices step 2) {
+            val longRange = readSeeds[i]..<readSeeds[i] + readSeeds[i + 1]
+            listOfRanges.add(longRange)
+        }
+
+        return listOfRanges.flatMap { it.toList() }
+    }
+
     fun readSeeds(input: List<String>): List<Long> {
         return input.first()
             .split(" ")
