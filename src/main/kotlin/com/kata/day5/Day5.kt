@@ -4,17 +4,17 @@ import java.io.File
 
 class Day5 {
 
-    fun processInput(inputLines: List<String>, part2: Boolean = false): Int {
+    fun processInput(inputLines: List<String>, part2: Boolean = false): Long {
         return readMaps(inputLines)
             .let { maps -> readSeeds(inputLines).minOfOrNull { walkThroughMaps(it, maps) } }
             ?: 0
     }
 
-    fun readSeeds(input: List<String>): List<Int> {
+    fun readSeeds(input: List<String>): List<Long> {
         return input.first()
             .split(" ")
             .filter { it != "seeds:" }
-            .map { it.toInt() }
+            .map { it.toLong() }
     }
 
     fun readMaps(input: List<String>): List<List<MapEntry>> {
@@ -34,7 +34,7 @@ class Day5 {
         return result
     }
 
-    fun walkThroughMaps(seed: Int, input: List<List<MapEntry>>): Int {
+    fun walkThroughMaps(seed: Long, input: List<List<MapEntry>>): Long {
         var result = seed
         input.forEach {
             result = getSoilFromSeed(result, it)
@@ -43,13 +43,13 @@ class Day5 {
     }
 
     internal fun convertToMapEntry(entry: String): MapEntry {
-        val split = entry.split(" ").map { it.toInt() }
+        val split = entry.split(" ").map { it.toLong() }
 
         val endRange = split[1] + split[2] - 1
         return MapEntry(split[1]..endRange, split[0] - split[1])
     }
 
-    internal fun getSoilFromSeed(input: Int, seedToSoilMapEntries: List<MapEntry>): Int {
+    internal fun getSoilFromSeed(input: Long, seedToSoilMapEntries: List<MapEntry>): Long {
         return seedToSoilMapEntries.firstOrNull {
             input in it.range
         }?.let {
@@ -59,8 +59,8 @@ class Day5 {
 }
 
 data class MapEntry(
-    val range: IntRange,
-    val offset: Int
+    val range: LongRange,
+    val offset: Long
 )
 
 fun main() {

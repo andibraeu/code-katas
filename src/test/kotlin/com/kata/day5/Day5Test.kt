@@ -1,13 +1,11 @@
 package com.kata.day5
 
-import com.kata.day3.NumberWithPosition
+import java.util.stream.Stream
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.Arguments
 import org.junit.jupiter.params.provider.MethodSource
-import org.junit.jupiter.params.provider.ValueSource
-import java.util.stream.Stream
 
 class Day5Test {
 
@@ -33,16 +31,16 @@ class Day5Test {
             )
         )
         val expected = listOf(
-            listOf(MapEntry(98..99, -48), MapEntry(50..97, 2)),
-            listOf(MapEntry(15..51, -15), MapEntry(52..53, -15), MapEntry(0..14, 39))
+            listOf(MapEntry(98L..99, -48), MapEntry(50L..97, 2)),
+            listOf(MapEntry(15L..51, -15), MapEntry(52L..53, -15), MapEntry(0L..14, 39))
         )
         assertThat(maps).isEqualTo(expected)
     }
 
     @ParameterizedTest
     @MethodSource("mapAssignments")
-    fun getSoilType(input: Int, expected: Int) {
-        val seedToSoilMap = listOf(MapEntry(98..99, -48), MapEntry(50..97, 2))
+    fun getSoilType(input: Long, expected: Long) {
+        val seedToSoilMap = listOf(MapEntry(98L..99, -48), MapEntry(50L..97, 2))
         val result = Day5().getSoilFromSeed(input, seedToSoilMap)
         assertThat(result).isEqualTo(expected)
     }
@@ -56,10 +54,10 @@ class Day5Test {
 
     @ParameterizedTest
     @MethodSource("seedToFertilizerAssignment")
-    fun resolveFertilizer(seed: Int, expected: Int) {
+    fun resolveFertilizer(seed: Long, expected: Long) {
         val input = listOf(
-            listOf(MapEntry(98..99, -48), MapEntry(50..97, 2)),
-            listOf(MapEntry(15..51, -15), MapEntry(52..53, -15), MapEntry(0..14, 39))
+            listOf(MapEntry(98L..99, -48), MapEntry(50L..97, 2)),
+            listOf(MapEntry(15L..51, -15), MapEntry(52L..53, -15), MapEntry(0L..14, 39))
         )
         val result = Day5().walkThroughMaps(seed, input)
         assertThat(result).isEqualTo(expected)
@@ -78,7 +76,7 @@ class Day5Test {
         val entry = "50 98 2"
 
         val result = Day5().convertToMapEntry(entry)
-        assertThat(result).isEqualTo(MapEntry(98..99, -48))
+        assertThat(result).isEqualTo(MapEntry(98L..99, -48))
     }
 
 }
