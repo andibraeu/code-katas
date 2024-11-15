@@ -1,12 +1,13 @@
 package com.kata.day5
 
-import com.kata.day4.Day4
 import java.io.File
 
 class Day5 {
 
     fun processInput(inputLines: List<String>, part2: Boolean = false): Int {
-        return 0
+        return readMaps(inputLines)
+            .let { maps -> readSeeds(inputLines).minOfOrNull { walkThroughMaps(it, maps) } }
+            ?: 0
     }
 
     fun readSeeds(input: List<String>): List<Int> {
@@ -33,27 +34,27 @@ class Day5 {
         return result
     }
 
-    fun convertToMapEntry(entry: String): MapEntry {
-        val split = entry.split(" ").map { it.toInt() }
-
-        val endRange = split[1] + split[2] - 1
-        return MapEntry(split[1]..endRange, split[0] - split[1])
-    }
-
-    fun getSoilFromSeed(input: Int, seedToSoilMapEntries: List<MapEntry>): Int {
-        return seedToSoilMapEntries.firstOrNull {
-            input in it.range
-        }?.let {
-            input + it.offset
-        }?: input
-    }
-
     fun walkThroughMaps(seed: Int, input: List<List<MapEntry>>): Int {
         var result = seed
         input.forEach {
             result = getSoilFromSeed(result, it)
         }
         return result
+    }
+
+    internal fun convertToMapEntry(entry: String): MapEntry {
+        val split = entry.split(" ").map { it.toInt() }
+
+        val endRange = split[1] + split[2] - 1
+        return MapEntry(split[1]..endRange, split[0] - split[1])
+    }
+
+    internal fun getSoilFromSeed(input: Int, seedToSoilMapEntries: List<MapEntry>): Int {
+        return seedToSoilMapEntries.firstOrNull {
+            input in it.range
+        }?.let {
+            input + it.offset
+        } ?: input
     }
 }
 
@@ -63,7 +64,7 @@ data class MapEntry(
 )
 
 fun main() {
-    val list = File("src/main/resources/day4/test_input.txt").bufferedReader().readLines()
+    val list = File("src/main/resources/day5/test_input.txt").bufferedReader().readLines()
 
-    println(Day4().processInput(list, true))
+    println(Day5().processInput(list, true))
 }
