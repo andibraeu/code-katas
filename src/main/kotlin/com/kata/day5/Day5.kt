@@ -1,6 +1,7 @@
 package com.kata.day5
 
 import java.io.File
+import java.util.stream.Collectors.toList
 
 class Day5 {
 
@@ -9,13 +10,13 @@ class Day5 {
             .let { maps ->
 
                 if (part2) {
-                    val listOfMins = mutableListOf<Long>()
-                    readSeedRanges(inputLines).forEach { seedRange ->
-                        val minOfOrNull = seedRange.minOfOrNull { walkThroughMaps(it, maps) } ?: 0
-                        listOfMins.add(minOfOrNull)
-                    }
+                    readSeedRanges(inputLines).parallelStream()
+                        .map { seedRange ->
+                            println(seedRange)
+                            seedRange.minOfOrNull { walkThroughMaps(it, maps) } ?: 0
+                        }.collect(toList())
+                        .min()
 
-                    listOfMins.min()
                 } else readSeeds(inputLines).minOfOrNull { walkThroughMaps(it, maps) }
             }
             ?: 0
@@ -87,7 +88,7 @@ data class MapEntry(
 )
 
 fun main() {
-    val list = File("src/main/resources/day5/andis_input.txt").bufferedReader().readLines()
+    val list = File("src/main/resources/day5/evas_input.txt").bufferedReader().readLines()
 
     println(Day5().processInput(list, true))
 }
