@@ -1,7 +1,8 @@
-package com.kata.day5
+package com.kata.day6
 
 import java.io.File
 import kotlin.math.ceil
+import kotlin.math.floor
 import kotlin.math.pow
 import kotlin.math.sqrt
 
@@ -41,12 +42,21 @@ class Day6 {
 
     fun calculateZeroPoints(time: Int, distance: Int): IntRange {
         val pqMinus = pqMinus(time, distance)
-        val first = ceil(pqMinus).toInt()
-        println("Minus $pqMinus")
+        val first = if (pqMinus % 1 != 0.0) {
+            ceil(pqMinus).toInt()
+        } else {
+            ceil(pqMinus).toInt() + 1
+        }
 
         val pqPlus = pqPlus(time, distance)
-        println("Plus $pqPlus")
-        val second: Int = pqPlus.toInt()
+        val second = if (pqPlus % 1 != 0.0) {
+            floor(pqPlus).toInt()
+        } else {
+            floor(pqPlus).toInt() - 1
+        }
+
+        println("Minus $pqMinus => $first")
+        println("Plus $pqPlus => $second")
 
         return first..second
     }

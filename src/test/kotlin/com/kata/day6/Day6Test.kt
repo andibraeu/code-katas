@@ -1,6 +1,5 @@
 package com.kata.day6
 
-import com.kata.day5.Day6
 import java.util.stream.Stream
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.params.ParameterizedTest
@@ -19,10 +18,10 @@ class Day6Test {
 
     }
 
-    fun testData(): Stream<Arguments> =
+    private fun testData(): Stream<Arguments> =
         Stream.of(
-//            Arguments.of(7, 9, 2..<6),
-//            Arguments.of(15, 40, 4..<12),
+            Arguments.of(7, 9, 2..<6),
+            Arguments.of(15, 40, 4..<12),
             Arguments.of(30, 200, 11..<20),
         )
 
