@@ -12,9 +12,9 @@ class Day6Test {
 
     @ParameterizedTest
     @MethodSource("testData")
-    fun calculateZeroPoints(time: Int, distance: Int, expectedResult: IntRange) {
+    fun calculateZeroPoints(time: Long, distance: Long, expectedResult: LongRange) {
 
-        val result: IntRange = Day6().calculateZeroPoints(time, distance)
+        val result = Day6().calculateZeroPoints(time, distance)
 
         println(result.toList())
         assertThat(result).isEqualTo(expectedResult)
@@ -39,9 +39,9 @@ class Day6Test {
 
     private fun testData(): Stream<Arguments> =
         Stream.of(
-            Arguments.of(7, 9, 2..<6),
-            Arguments.of(15, 40, 4..<12),
-            Arguments.of(30, 200, 11..<20),
+            Arguments.of(7L, 9L, 2L..<6),
+            Arguments.of(15L, 40L, 4L..<12),
+            Arguments.of(30L, 200L, 11L..<20),
         )
 
 }

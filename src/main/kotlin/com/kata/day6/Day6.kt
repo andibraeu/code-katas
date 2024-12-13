@@ -46,39 +46,39 @@ class Day6 {
             .reduce { acc, i -> acc * i }
     }
 
-    fun readInput(input: List<String>, entity: String): List<Int> {
+    fun readInput(input: List<String>, entity: String): List<Long> {
         return input.first {
             it.startsWith(entity)
         }
             .replace("\\s+".toRegex(), " ")
             .split(" ")
             .filter { it != "$entity:" }
-            .map { it.toInt() }
+            .map { it.toLong() }
     }
 
-    fun readInputPart2(input: List<String>, entity: String): List<Int> {
+    fun readInputPart2(input: List<String>, entity: String): List<Long> {
         return input.first {
             it.startsWith(entity)
         }
             .replace("\\s+".toRegex(), "")
             .split(":")
             .filter { it != entity }
-            .map { it.toInt() }
+            .map { it.toLong() }
     }
 
-    fun calculateZeroPoints(time: Int, distance: Int): IntRange {
+    fun calculateZeroPoints(time: Long, distance: Long): LongRange {
         val pqMinus = pqMinus(time, distance)
         val first = if (pqMinus % 1 != 0.0) {
-            ceil(pqMinus).toInt()
+            ceil(pqMinus).toLong()
         } else {
-            ceil(pqMinus).toInt() + 1
+            ceil(pqMinus).toLong() + 1
         }
 
         val pqPlus = pqPlus(time, distance)
         val second = if (pqPlus % 1 != 0.0) {
-            floor(pqPlus).toInt()
+            floor(pqPlus).toLong()
         } else {
-            floor(pqPlus).toInt() - 1
+            floor(pqPlus).toLong() - 1
         }
 
         println("Minus $pqMinus => $first")
@@ -87,14 +87,14 @@ class Day6 {
         return first..second
     }
 
-    private fun pqPlus(time: Int, distance: Int) = (time / 2.0) + sqrt((time / 2.0).pow(2) - distance)
+    private fun pqPlus(time: Long, distance: Long) = (time / 2.0) + sqrt((time / 2.0).pow(2) - distance)
 
-    private fun pqMinus(time: Int, distance: Int) = (time / 2.0) - sqrt((time / 2.0).pow(2) - distance)
+    private fun pqMinus(time: Long, distance: Long) = (time / 2.0) - sqrt((time / 2.0).pow(2) - distance)
 }
 
 
 fun main() {
-    val list = File("src/main/resources/day6/test_input.txt").bufferedReader().readLines()
+    val list = File("src/main/resources/day6/andis_input.txt").bufferedReader().readLines()
 
     println(Day6().processInput(list, true))
 }
