@@ -36,8 +36,24 @@ pq-Formel:
 
 class Day6 {
 
-    fun processInput(inputLines: List<String>, part2: Boolean = false): Long {
-        return 0
+    fun processInput(inputLines: List<String>, part2: Boolean = false): Int {
+        val timeList = readInput(inputLines, "Time")
+        val distanceList = readInput(inputLines, "Distance")
+        return timeList
+            .mapIndexed { index, time ->
+                calculateZeroPoints(time, distanceList[index]).toList().size
+            }
+            .reduce { acc, i -> acc * i }
+    }
+
+    fun readInput(input: List<String>, entity: String): List<Int> {
+        return input.first {
+            it.startsWith(entity)
+        }
+            .replace("\\s+".toRegex(), " ")
+            .split(" ")
+            .filter { it != "$entity:" }
+            .map { it.toInt() }
     }
 
     fun calculateZeroPoints(time: Int, distance: Int): IntRange {
@@ -68,7 +84,7 @@ class Day6 {
 
 
 fun main() {
-    val list = File("src/main/resources/day6/evas_input.txt").bufferedReader().readLines()
+    val list = File("src/main/resources/day6/test_input.txt").bufferedReader().readLines()
 
     println(Day6().processInput(list, true))
 }

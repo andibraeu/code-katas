@@ -1,7 +1,9 @@
 package com.kata.day6
 
+import com.kata.day5.Day5
 import java.util.stream.Stream
 import org.assertj.core.api.Assertions.assertThat
+import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.Arguments
 import org.junit.jupiter.params.provider.MethodSource
@@ -14,8 +16,17 @@ class Day6Test {
 
         val result: IntRange = Day6().calculateZeroPoints(time, distance)
 
+        println(result.toList())
         assertThat(result).isEqualTo(expectedResult)
 
+    }
+
+    @Test
+    fun readInputsLine() {
+        val timeList = Day6().readInput(listOf("Time:      7  15   30", "Distance:  9  40  200"), "Time")
+        val distanceList = Day6().readInput(listOf("Time:      7  15   30", "Distance:  9  40  200"), "Distance")
+        assertThat(timeList).containsExactly(7, 15, 30)
+        assertThat(distanceList).containsExactly(9, 40, 200)
     }
 
     private fun testData(): Stream<Arguments> =
