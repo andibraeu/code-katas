@@ -84,7 +84,7 @@ class Day6 {
 
 
 fun main() {
-    val list = File("src/main/resources/day6/test_input.txt").bufferedReader().readLines()
+    val list = File("src/main/resources/day6/evas_input.txt").bufferedReader().readLines()
 
     println(Day6().processInput(list, true))
 }
