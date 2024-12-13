@@ -29,6 +29,14 @@ class Day6Test {
         assertThat(distanceList).containsExactly(9, 40, 200)
     }
 
+    @Test
+    fun readInputsLinePart2() {
+        val timeList = Day6().readInputPart2(listOf("Time:      7  15   30", "Distance:  9  40  200"), "Time")
+        val distanceList = Day6().readInputPart2(listOf("Time:      7  15   30", "Distance:  9  40  200"), "Distance")
+        assertThat(timeList).containsExactly(71530)
+        assertThat(distanceList).containsExactly(940200)
+    }
+
     private fun testData(): Stream<Arguments> =
         Stream.of(
             Arguments.of(7, 9, 2..<6),
