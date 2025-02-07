@@ -1,5 +1,12 @@
 package com.kata.day7
 
+import com.kata.day7.Types.FIVE_OF_A_KIND
+import com.kata.day7.Types.FOUR_OF_A_KIND
+import com.kata.day7.Types.FULL_HOUSE
+import com.kata.day7.Types.HIGH_CARD
+import com.kata.day7.Types.ONE_PAIR
+import com.kata.day7.Types.THREE_OF_A_KIND
+import com.kata.day7.Types.TWO_PAIR
 import java.io.File
 
 /*
@@ -14,7 +21,15 @@ class Day7 {
     }
 
     fun evaluateHand(hand: List<Cards>): Types {
-        return Types.TWO_PAIR
+        val result = hand.groupingBy { it }.eachCount()
+
+        return if (result.size == 1) FIVE_OF_A_KIND
+        else if (result.size == 2 && result.filter { it.value == 4 }.isNotEmpty()) FOUR_OF_A_KIND
+        else if (result.size == 2) FULL_HOUSE
+        else if (result.size == 3 && result.filter { it.value == 3 }.isNotEmpty()) THREE_OF_A_KIND
+        else if (result.size == 3) TWO_PAIR
+        else if (result.size == 4) ONE_PAIR
+        else HIGH_CARD
     }
 
 
