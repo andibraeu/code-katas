@@ -23,13 +23,15 @@ class Day7 {
     fun evaluateHand(hand: List<Cards>): Types {
         val result = hand.groupingBy { it }.eachCount()
 
-        return if (result.size == 1) FIVE_OF_A_KIND
-        else if (result.size == 2 && result.filter { it.value == 4 }.isNotEmpty()) FOUR_OF_A_KIND
-        else if (result.size == 2) FULL_HOUSE
-        else if (result.size == 3 && result.filter { it.value == 3 }.isNotEmpty()) THREE_OF_A_KIND
-        else if (result.size == 3) TWO_PAIR
-        else if (result.size == 4) ONE_PAIR
-        else HIGH_CARD
+        return when {
+            result.size == 1 -> FIVE_OF_A_KIND
+            result.size == 2 && result.filter { it.value == 4 }.isNotEmpty() -> FOUR_OF_A_KIND
+            result.size == 2 -> FULL_HOUSE
+            result.size == 3 && result.filter { it.value == 3 }.isNotEmpty() -> THREE_OF_A_KIND
+            result.size == 3 -> TWO_PAIR
+            result.size == 4 -> ONE_PAIR
+            else -> HIGH_CARD
+        }
     }
 
 
