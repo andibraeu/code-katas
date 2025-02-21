@@ -1,5 +1,6 @@
 package com.kata.day7
 
+import com.kata.day7.Cards.EIGHT
 import com.kata.day7.Cards.FIVE
 import com.kata.day7.Cards.FOUR
 import com.kata.day7.Cards.K
@@ -15,6 +16,7 @@ import com.kata.day7.Types.THREE_OF_A_KIND
 import com.kata.day7.Types.TWO_PAIR
 import java.util.stream.Stream
 import org.assertj.core.api.Assertions.assertThat
+import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.Arguments.of
 import org.junit.jupiter.params.provider.MethodSource
@@ -41,4 +43,11 @@ class Day7Test {
             of(listOf(SEVEN, TWO, K, SIX, FIVE), HIGH_CARD),
         )
 
+
+    @Test
+    fun compareCards() {
+        assertThat(SIX.compare(SEVEN)).isEqualTo(-1)
+        assertThat(SIX.compare(SIX)).isEqualTo(0)
+        assertThat(EIGHT.compare(SEVEN)).isEqualTo(1)
+    }
 }

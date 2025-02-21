@@ -9,11 +9,6 @@ import com.kata.day7.Types.THREE_OF_A_KIND
 import com.kata.day7.Types.TWO_PAIR
 import java.io.File
 
-/*
-
-
-*/
-
 class Day7 {
 
     fun processInput(inputLines: List<String>, part2: Boolean = false): Int {
@@ -33,11 +28,13 @@ class Day7 {
             else -> HIGH_CARD
         }
     }
-
-
 }
 
-enum class Cards(value: String, sortOrder: Int) {
+fun Cards.compare(otherCard: Cards): Int {
+    return sortOrder.compareTo(otherCard.sortOrder)
+}
+
+enum class Cards(val value: String, val sortOrder: Int) {
     A("A", 14),
     K("K", 13),
     Q("Q", 12),
@@ -51,6 +48,7 @@ enum class Cards(value: String, sortOrder: Int) {
     FOUR("4", 4),
     THREE("3", 3),
     TWO("2", 2)
+
 }
 
 enum class Types(sortOrder: Int) {
